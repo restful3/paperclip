@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 540" font-family="'Inter','Noto Sans KR',sans-serif" font-size="12">
+  <defs>
+    <marker id="m8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5b5b62"/>
+    </marker>
+  </defs>
+  <rect width="1100" height="540" fill="#fafafa"/>
+
+  <!-- Company header -->
+  <rect x="380" y="32" width="340" height="64" rx="8" fill="#dde7f3" stroke="#0f2c59" stroke-width="1.5"/>
+  <text x="550" y="56" text-anchor="middle" fill="#0f2c59" font-weight="700">Company  ·  "AI note-taking app, $1M MRR"</text>
+  <text x="550" y="74" text-anchor="middle" fill="#5b5b62" font-size="11">issue_prefix=PAP · budget_monthly=$2,000 · status=active</text>
+  <text x="550" y="88" text-anchor="middle" fill="#5b5b62" font-size="11">spent=$840 · agents=14 · open issues=58</text>
+
+  <!-- CEO -->
+  <rect x="430" y="132" width="240" height="68" rx="8" fill="#fde7e3" stroke="#c84a3a" stroke-width="1.5"/>
+  <text x="550" y="156" text-anchor="middle" fill="#c84a3a" font-weight="700">CEO  ·  Aurora</text>
+  <text x="550" y="172" text-anchor="middle" fill="#5b5b62" font-size="11">claude-local · status=running</text>
+  <text x="550" y="187" text-anchor="middle" fill="#5b5b62" font-size="11">budget $400 · spent $213</text>
+
+  <!-- Reports -->
+  <g>
+    <rect x="60" y="240" width="200" height="64" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+    <text x="160" y="262" text-anchor="middle" fill="#1a1a2e" font-weight="700">CTO  ·  Hari</text>
+    <text x="160" y="278" text-anchor="middle" fill="#5b5b62" font-size="11">claude-local · running</text>
+    <text x="160" y="294" text-anchor="middle" fill="#5b5b62" font-size="11">budget $300 · spent $182</text>
+  </g>
+  <g>
+    <rect x="280" y="240" width="200" height="64" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+    <text x="380" y="262" text-anchor="middle" fill="#1a1a2e" font-weight="700">CMO  ·  Lina</text>
+    <text x="380" y="278" text-anchor="middle" fill="#5b5b62" font-size="11">openclaw-gateway · idle</text>
+    <text x="380" y="294" text-anchor="middle" fill="#5b5b62" font-size="11">budget $250 · spent $98</text>
+  </g>
+  <g>
+    <rect x="500" y="240" width="200" height="64" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+    <text x="600" y="262" text-anchor="middle" fill="#1a1a2e" font-weight="700">CFO  ·  Miyu</text>
+    <text x="600" y="278" text-anchor="middle" fill="#5b5b62" font-size="11">codex-local · idle</text>
+    <text x="600" y="294" text-anchor="middle" fill="#5b5b62" font-size="11">budget $80 · spent $7</text>
+  </g>
+  <g>
+    <rect x="720" y="240" width="200" height="64" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+    <text x="820" y="262" text-anchor="middle" fill="#1a1a2e" font-weight="700">PM  ·  Otto</text>
+    <text x="820" y="278" text-anchor="middle" fill="#5b5b62" font-size="11">cursor-local · running</text>
+    <text x="820" y="294" text-anchor="middle" fill="#5b5b62" font-size="11">budget $120 · spent $44</text>
+  </g>
+  <g>
+    <rect x="940" y="240" width="120" height="64" rx="6" fill="#ffffff" stroke="#5b5b62" stroke-dasharray="3 3"/>
+    <text x="1000" y="262" text-anchor="middle" fill="#5b5b62" font-weight="700">+ Hire</text>
+    <text x="1000" y="282" text-anchor="middle" fill="#5b5b62" font-size="10">requires board</text>
+    <text x="1000" y="296" text-anchor="middle" fill="#5b5b62" font-size="10">approval</text>
+  </g>
+
+  <!-- Eng team under CTO -->
+  <g>
+    <rect x="40" y="364" width="160" height="56" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+    <text x="120" y="386" text-anchor="middle" fill="#1a1a2e" font-weight="700">Eng · Pearl</text>
+    <text x="120" y="402" text-anchor="middle" fill="#5b5b62" font-size="11">opencode-local · running</text>
+    <text x="120" y="416" text-anchor="middle" fill="#5b5b62" font-size="11">issue PAP-87 in_progress</text>
+  </g>
+  <g>
+    <rect x="220" y="364" width="160" height="56" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+    <text x="300" y="386" text-anchor="middle" fill="#1a1a2e" font-weight="700">Eng · Brio</text>
+    <text x="300" y="402" text-anchor="middle" fill="#5b5b62" font-size="11">claude-local · idle</text>
+    <text x="300" y="416" text-anchor="middle" fill="#5b5b62" font-size="11">last heartbeat 3m</text>
+  </g>
+  <g>
+    <rect x="40" y="440" width="160" height="56" rx="6" fill="#fde7e3" stroke="#c84a3a"/>
+    <text x="120" y="462" text-anchor="middle" fill="#c84a3a" font-weight="700">QA · Onyx</text>
+    <text x="120" y="478" text-anchor="middle" fill="#5b5b62" font-size="11">paused (budget hit)</text>
+    <text x="120" y="492" text-anchor="middle" fill="#5b5b62" font-size="11">incident #14</text>
+  </g>
+
+  <!-- Marketing under CMO -->
+  <g>
+    <rect x="400" y="364" width="160" height="56" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+    <text x="480" y="386" text-anchor="middle" fill="#1a1a2e" font-weight="700">Growth · Vela</text>
+    <text x="480" y="402" text-anchor="middle" fill="#5b5b62" font-size="11">openclaw-gateway · idle</text>
+    <text x="480" y="416" text-anchor="middle" fill="#5b5b62" font-size="11">cross-team req depth=2</text>
+  </g>
+
+  <!-- PM children under PM -->
+  <g>
+    <rect x="700" y="364" width="160" height="56" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+    <text x="780" y="386" text-anchor="middle" fill="#1a1a2e" font-weight="700">Support · Kel</text>
+    <text x="780" y="402" text-anchor="middle" fill="#5b5b62" font-size="11">http adapter · idle</text>
+    <text x="780" y="416" text-anchor="middle" fill="#5b5b62" font-size="11">heartbeat hourly</text>
+  </g>
+  <g>
+    <rect x="880" y="364" width="160" height="56" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+    <text x="960" y="386" text-anchor="middle" fill="#1a1a2e" font-weight="700">Designer · Iris</text>
+    <text x="960" y="402" text-anchor="middle" fill="#5b5b62" font-size="11">acpx-local · idle</text>
+    <text x="960" y="416" text-anchor="middle" fill="#5b5b62" font-size="11">last heartbeat 12m</text>
+  </g>
+
+  <!-- edges -->
+  <g stroke="#5b5b62" stroke-width="1" fill="none">
+    <path d="M550,200 L550,224 L160,224 L160,240" marker-end="url(#m8)"/>
+    <path d="M550,224 L380,224 L380,240" marker-end="url(#m8)"/>
+    <path d="M550,224 L600,224 L600,240" marker-end="url(#m8)"/>
+    <path d="M550,224 L820,224 L820,240" marker-end="url(#m8)"/>
+    <path d="M550,224 L1000,224 L1000,240" stroke-dasharray="3 3"/>
+
+    <path d="M160,304 L160,344 L120,344 L120,364" marker-end="url(#m8)"/>
+    <path d="M160,344 L300,344 L300,364" marker-end="url(#m8)"/>
+    <path d="M120,420 L120,440" marker-end="url(#m8)"/>
+
+    <path d="M380,304 L480,344 L480,364" marker-end="url(#m8)"/>
+    <path d="M820,304 L780,344 L780,364" marker-end="url(#m8)"/>
+    <path d="M820,304 L960,344 L960,364" marker-end="url(#m8)"/>
+  </g>
+
+  <!-- caption legend strip -->
+  <g font-size="11" fill="#5b5b62">
+    <text x="40" y="32" font-weight="700" fill="#0f2c59" letter-spacing="2">ORG · agents.reports_to TREE</text>
+    <text x="40" y="510" font-weight="700" fill="#1a1a2e">Legend</text>
+    <rect x="116" y="500" width="14" height="14" fill="#fde7e3" stroke="#c84a3a"/><text x="138" y="510">CEO / paused / over-budget</text>
+    <rect x="320" y="500" width="14" height="14" fill="#ffffff" stroke="#1a1a2e"/><text x="342" y="510">active employee</text>
+    <rect x="476" y="500" width="14" height="14" fill="#ffffff" stroke="#5b5b62" stroke-dasharray="3 3"/><text x="500" y="510">pending hire (board approval gate)</text>
+  </g>
+</svg>

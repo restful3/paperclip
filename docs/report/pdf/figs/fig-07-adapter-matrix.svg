@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 540" font-family="'Inter','Noto Sans KR',sans-serif" font-size="12">
+  <rect width="1100" height="540" fill="#fafafa"/>
+
+  <!-- Header -->
+  <g font-weight="700" fill="#0f2c59">
+    <rect x="40" y="40" width="200" height="48" fill="#dde7f3" stroke="#0f2c59"/>
+    <text x="140" y="68" text-anchor="middle">Adapter</text>
+
+    <rect x="240" y="40" width="100" height="48" fill="#dde7f3" stroke="#0f2c59"/>
+    <text x="290" y="62" text-anchor="middle" font-size="11">callable</text>
+    <text x="290" y="78" text-anchor="middle" font-size="10" fill="#5b5b62">invoke()</text>
+
+    <rect x="340" y="40" width="100" height="48" fill="#dde7f3" stroke="#0f2c59"/>
+    <text x="390" y="62" text-anchor="middle" font-size="11">status</text>
+    <text x="390" y="78" text-anchor="middle" font-size="10" fill="#5b5b62">poll·watchdog</text>
+
+    <rect x="440" y="40" width="100" height="48" fill="#dde7f3" stroke="#0f2c59"/>
+    <text x="490" y="62" text-anchor="middle" font-size="11">cancel</text>
+    <text x="490" y="78" text-anchor="middle" font-size="10" fill="#5b5b62">graceful</text>
+
+    <rect x="540" y="40" width="120" height="48" fill="#dde7f3" stroke="#0f2c59"/>
+    <text x="600" y="62" text-anchor="middle" font-size="11">cost report</text>
+    <text x="600" y="78" text-anchor="middle" font-size="10" fill="#5b5b62">tokens · cents</text>
+
+    <rect x="660" y="40" width="120" height="48" fill="#dde7f3" stroke="#0f2c59"/>
+    <text x="720" y="62" text-anchor="middle" font-size="11">stream JSON</text>
+    <text x="720" y="78" text-anchor="middle" font-size="10" fill="#5b5b62">stdout NDJSON</text>
+
+    <rect x="780" y="40" width="100" height="48" fill="#dde7f3" stroke="#0f2c59"/>
+    <text x="830" y="62" text-anchor="middle" font-size="11">MCP</text>
+    <text x="830" y="78" text-anchor="middle" font-size="10" fill="#5b5b62">tools/resources</text>
+
+    <rect x="880" y="40" width="180" height="48" fill="#dde7f3" stroke="#0f2c59"/>
+    <text x="970" y="62" text-anchor="middle" font-size="11">execution surface</text>
+    <text x="970" y="78" text-anchor="middle" font-size="10" fill="#5b5b62">how Paperclip starts it</text>
+  </g>
+
+  <!-- Rows helper for cells -->
+  <g font-size="14" font-weight="700">
+    <!-- claude-local -->
+    <g>
+      <rect x="40" y="88" width="200" height="44" fill="#ffffff" stroke="#d4d4d8"/>
+      <text x="56" y="113" font-weight="700" font-size="13" fill="#1a1a2e">claude-local</text>
+      <text x="56" y="127" font-size="10" fill="#5b5b62">@anthropic Claude Code</text>
+      <rect x="240" y="88" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="290" y="115" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="340" y="88" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="390" y="115" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="440" y="88" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="490" y="115" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="540" y="88" width="120" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="600" y="115" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="660" y="88" width="120" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="720" y="115" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="780" y="88" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="830" y="115" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="880" y="88" width="180" height="44" fill="#ffffff" stroke="#d4d4d8"/>
+      <text x="970" y="113" text-anchor="middle" font-size="11" font-weight="500" fill="#1a1a2e">spawn(claude -p ...)</text>
+      <text x="970" y="127" text-anchor="middle" font-size="10" fill="#5b5b62">--output-format stream-json</text>
+    </g>
+
+    <!-- codex-local -->
+    <g>
+      <rect x="40" y="132" width="200" height="44" fill="#ffffff" stroke="#d4d4d8"/>
+      <text x="56" y="157" font-weight="700" font-size="13" fill="#1a1a2e">codex-local</text>
+      <text x="56" y="171" font-size="10" fill="#5b5b62">OpenAI Codex CLI</text>
+      <rect x="240" y="132" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="290" y="159" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="340" y="132" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="390" y="159" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="440" y="132" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="490" y="159" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="540" y="132" width="120" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="600" y="159" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="660" y="132" width="120" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="720" y="159" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="780" y="132" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="830" y="159" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="880" y="132" width="180" height="44" fill="#ffffff" stroke="#d4d4d8"/>
+      <text x="970" y="157" text-anchor="middle" font-size="11" font-weight="500" fill="#1a1a2e">spawn(codex exec)</text>
+      <text x="970" y="171" text-anchor="middle" font-size="10" fill="#5b5b62">--json --model</text>
+    </g>
+
+    <!-- cursor-local -->
+    <g>
+      <rect x="40" y="176" width="200" height="44" fill="#ffffff" stroke="#d4d4d8"/>
+      <text x="56" y="201" font-weight="700" font-size="13" fill="#1a1a2e">cursor-local</text>
+      <text x="56" y="215" font-size="10" fill="#5b5b62">cursor.com CLI</text>
+      <rect x="240" y="176" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="290" y="203" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="340" y="176" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="390" y="203" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="440" y="176" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="490" y="203" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="540" y="176" width="120" height="44" fill="#ffffff" stroke="#d4d4d8"/><text x="600" y="203" text-anchor="middle" fill="#5b5b62">◐</text>
+      <rect x="660" y="176" width="120" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="720" y="203" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="780" y="176" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="830" y="203" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="880" y="176" width="180" height="44" fill="#ffffff" stroke="#d4d4d8"/>
+      <text x="970" y="201" text-anchor="middle" font-size="11" font-weight="500" fill="#1a1a2e">spawn(cursor-agent)</text>
+      <text x="970" y="215" text-anchor="middle" font-size="10" fill="#5b5b62">closed-source SaaS</text>
+    </g>
+
+    <!-- gemini-local -->
+    <g>
+      <rect x="40" y="220" width="200" height="44" fill="#ffffff" stroke="#d4d4d8"/>
+      <text x="56" y="245" font-weight="700" font-size="13" fill="#1a1a2e">gemini-local</text>
+      <text x="56" y="259" font-size="10" fill="#5b5b62">google-gemini/gemini-cli</text>
+      <rect x="240" y="220" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="290" y="247" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="340" y="220" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="390" y="247" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="440" y="220" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="490" y="247" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="540" y="220" width="120" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="600" y="247" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="660" y="220" width="120" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="720" y="247" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="780" y="220" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="830" y="247" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="880" y="220" width="180" height="44" fill="#ffffff" stroke="#d4d4d8"/>
+      <text x="970" y="245" text-anchor="middle" font-size="11" font-weight="500" fill="#1a1a2e">spawn(gemini -p)</text>
+      <text x="970" y="259" text-anchor="middle" font-size="10" fill="#5b5b62">Apache-2.0</text>
+    </g>
+
+    <!-- opencode-local -->
+    <g>
+      <rect x="40" y="264" width="200" height="44" fill="#ffffff" stroke="#d4d4d8"/>
+      <text x="56" y="289" font-weight="700" font-size="13" fill="#1a1a2e">opencode-local</text>
+      <text x="56" y="303" font-size="10" fill="#5b5b62">sst/opencode</text>
+      <rect x="240" y="264" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="290" y="291" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="340" y="264" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="390" y="291" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="440" y="264" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="490" y="291" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="540" y="264" width="120" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="600" y="291" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="660" y="264" width="120" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="720" y="291" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="780" y="264" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="830" y="291" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="880" y="264" width="180" height="44" fill="#ffffff" stroke="#d4d4d8"/>
+      <text x="970" y="289" text-anchor="middle" font-size="11" font-weight="500" fill="#1a1a2e">spawn(opencode run)</text>
+      <text x="970" y="303" text-anchor="middle" font-size="10" fill="#5b5b62">MIT · BYOK</text>
+    </g>
+
+    <!-- pi-local -->
+    <g>
+      <rect x="40" y="308" width="200" height="44" fill="#ffffff" stroke="#d4d4d8"/>
+      <text x="56" y="333" font-weight="700" font-size="13" fill="#1a1a2e">pi-local</text>
+      <text x="56" y="347" font-size="10" fill="#5b5b62">@mariozechner/pi-coding-agent</text>
+      <rect x="240" y="308" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="290" y="335" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="340" y="308" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="390" y="335" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="440" y="308" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="490" y="335" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="540" y="308" width="120" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="600" y="335" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="660" y="308" width="120" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="720" y="335" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="780" y="308" width="100" height="44" fill="#ffffff" stroke="#d4d4d8"/><text x="830" y="335" text-anchor="middle" fill="#5b5b62">○</text>
+      <rect x="880" y="308" width="180" height="44" fill="#ffffff" stroke="#d4d4d8"/>
+      <text x="970" y="333" text-anchor="middle" font-size="11" font-weight="500" fill="#1a1a2e">spawn(pi --mode json)</text>
+      <text x="970" y="347" text-anchor="middle" font-size="10" fill="#5b5b62">skills via ~/.pi/agent/skills</text>
+    </g>
+
+    <!-- acpx-local -->
+    <g>
+      <rect x="40" y="352" width="200" height="44" fill="#ffffff" stroke="#d4d4d8"/>
+      <text x="56" y="377" font-weight="700" font-size="13" fill="#1a1a2e">acpx-local</text>
+      <text x="56" y="391" font-size="10" fill="#5b5b62">Agent Client Protocol bridge</text>
+      <rect x="240" y="352" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="290" y="379" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="340" y="352" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="390" y="379" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="440" y="352" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="490" y="379" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="540" y="352" width="120" height="44" fill="#ffffff" stroke="#d4d4d8"/><text x="600" y="379" text-anchor="middle" fill="#5b5b62">◐</text>
+      <rect x="660" y="352" width="120" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="720" y="379" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="780" y="352" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="830" y="379" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="880" y="352" width="180" height="44" fill="#ffffff" stroke="#d4d4d8"/>
+      <text x="970" y="377" text-anchor="middle" font-size="11" font-weight="500" fill="#1a1a2e">JSON-RPC over stdio</text>
+      <text x="970" y="391" text-anchor="middle" font-size="10" fill="#5b5b62">Zed-style ACP</text>
+    </g>
+
+    <!-- openclaw-gateway -->
+    <g>
+      <rect x="40" y="396" width="200" height="44" fill="#fde7e3" stroke="#c84a3a"/>
+      <text x="56" y="421" font-weight="700" font-size="13" fill="#c84a3a">openclaw-gateway</text>
+      <text x="56" y="435" font-size="10" fill="#5b5b62">remote agent webhook</text>
+      <rect x="240" y="396" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="290" y="423" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="340" y="396" width="100" height="44" fill="#ffffff" stroke="#d4d4d8"/><text x="390" y="423" text-anchor="middle" fill="#5b5b62">◐</text>
+      <rect x="440" y="396" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="490" y="423" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="540" y="396" width="120" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="600" y="423" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="660" y="396" width="120" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="720" y="423" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="780" y="396" width="100" height="44" fill="#ffffff" stroke="#d4d4d8"/><text x="830" y="423" text-anchor="middle" fill="#5b5b62">◐</text>
+      <rect x="880" y="396" width="180" height="44" fill="#ffffff" stroke="#d4d4d8"/>
+      <text x="970" y="421" text-anchor="middle" font-size="11" font-weight="500" fill="#1a1a2e">POST /hook (HTTP)</text>
+      <text x="970" y="435" text-anchor="middle" font-size="10" fill="#5b5b62">HTTP pingback channel</text>
+    </g>
+
+    <!-- generic process / http -->
+    <g>
+      <rect x="40" y="440" width="200" height="44" fill="#ffffff" stroke="#5b5b62" stroke-dasharray="3 3"/>
+      <text x="56" y="465" font-weight="700" font-size="13" fill="#5b5b62">process · http (built-in)</text>
+      <text x="56" y="479" font-size="10" fill="#5b5b62">generic SDK contract</text>
+      <rect x="240" y="440" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="290" y="467" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="340" y="440" width="100" height="44" fill="#ffffff" stroke="#d4d4d8"/><text x="390" y="467" text-anchor="middle" fill="#5b5b62">◐</text>
+      <rect x="440" y="440" width="100" height="44" fill="#fde7e3" stroke="#d4d4d8"/><text x="490" y="467" text-anchor="middle" fill="#c84a3a">●</text>
+      <rect x="540" y="440" width="120" height="44" fill="#ffffff" stroke="#d4d4d8"/><text x="600" y="467" text-anchor="middle" fill="#5b5b62">○</text>
+      <rect x="660" y="440" width="120" height="44" fill="#ffffff" stroke="#d4d4d8"/><text x="720" y="467" text-anchor="middle" fill="#5b5b62">○</text>
+      <rect x="780" y="440" width="100" height="44" fill="#ffffff" stroke="#d4d4d8"/><text x="830" y="467" text-anchor="middle" fill="#5b5b62">○</text>
+      <rect x="880" y="440" width="180" height="44" fill="#ffffff" stroke="#d4d4d8"/>
+      <text x="970" y="465" text-anchor="middle" font-size="11" font-weight="500" fill="#5b5b62">spawn(any) · POST(any)</text>
+      <text x="970" y="479" text-anchor="middle" font-size="10" fill="#5b5b62">"if it's callable, it's hired"</text>
+    </g>
+  </g>
+
+  <!-- Legend -->
+  <g font-size="11">
+    <text x="40" y="510" fill="#1a1a2e" font-weight="700">Legend</text>
+    <text x="120" y="510" fill="#c84a3a">●</text><text x="135" y="510" fill="#5b5b62">first-class</text>
+    <text x="220" y="510" fill="#5b5b62">◐</text><text x="235" y="510" fill="#5b5b62">partial / via wrapper</text>
+    <text x="370" y="510" fill="#5b5b62">○</text><text x="385" y="510" fill="#5b5b62">not provided by adapter</text>
+    <text x="40" y="528" fill="#5b5b62">Axes are abstract capability dimensions of ServerAdapterModule (execute / testEnvironment / sessionCodec / listSkills / getQuotaWindows / getConfigSchema), not 1:1 to runtime CLI signals.</text>
+  </g>
+</svg>

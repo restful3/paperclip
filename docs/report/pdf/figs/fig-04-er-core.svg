@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 680" font-family="'Inter','Noto Sans KR',sans-serif" font-size="11">
+  <defs>
+    <marker id="merc" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#5b5b62"/>
+    </marker>
+  </defs>
+  <rect width="1100" height="680" fill="#fafafa"/>
+
+  <!-- companies (root) -->
+  <rect x="450" y="20" width="200" height="100" rx="6" fill="#dde7f3" stroke="#0f2c59" stroke-width="1.5"/>
+  <text x="550" y="40" text-anchor="middle" fill="#0f2c59" font-weight="700">companies</text>
+  <line x1="466" y1="48" x2="634" y2="48" stroke="#0f2c59"/>
+  <text x="466" y="64" fill="#1a1a2e">id (PK)</text>
+  <text x="466" y="78" fill="#1a1a2e">name · description · status</text>
+  <text x="466" y="92" fill="#1a1a2e">issue_prefix · issue_counter</text>
+  <text x="466" y="106" fill="#1a1a2e">budget_monthly_cents · spent_monthly_cents</text>
+
+  <!-- agents -->
+  <rect x="60" y="180" width="220" height="120" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="170" y="200" text-anchor="middle" fill="#1a1a2e" font-weight="700">agents</text>
+  <line x1="76" y1="208" x2="264" y2="208" stroke="#1a1a2e"/>
+  <text x="76" y="224">id (PK)</text>
+  <text x="76" y="238">company_id (FK)</text>
+  <text x="76" y="252">reports_to (FK→agents.id)  ★ tree</text>
+  <text x="76" y="266">adapter_type · adapter_config (jsonb)</text>
+  <text x="76" y="280">status · last_heartbeat_at</text>
+  <text x="76" y="294">budget_monthly_cents · spent</text>
+
+  <!-- goals -->
+  <rect x="320" y="180" width="180" height="100" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="410" y="200" text-anchor="middle" fill="#1a1a2e" font-weight="700">goals</text>
+  <line x1="336" y1="208" x2="484" y2="208" stroke="#1a1a2e"/>
+  <text x="336" y="224">id (PK)</text>
+  <text x="336" y="238">company_id (FK)</text>
+  <text x="336" y="252">title · status</text>
+  <text x="336" y="266">parent_goal_id (FK self)</text>
+
+  <!-- projects -->
+  <rect x="540" y="180" width="180" height="100" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="630" y="200" text-anchor="middle" fill="#1a1a2e" font-weight="700">projects</text>
+  <line x1="556" y1="208" x2="704" y2="208" stroke="#1a1a2e"/>
+  <text x="556" y="224">id (PK)</text>
+  <text x="556" y="238">company_id (FK)</text>
+  <text x="556" y="252">workspace policy</text>
+  <text x="556" y="266">budget_monthly_cents</text>
+
+  <!-- approvals -->
+  <rect x="760" y="180" width="200" height="100" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="860" y="200" text-anchor="middle" fill="#1a1a2e" font-weight="700">approvals</text>
+  <line x1="776" y1="208" x2="944" y2="208" stroke="#1a1a2e"/>
+  <text x="776" y="224">id (PK) · company_id (FK)</text>
+  <text x="776" y="238">type · payload (jsonb)</text>
+  <text x="776" y="252">requested_by_agent_id? / user_id?</text>
+  <text x="776" y="266">status · decision_note · decided_by_user_id?</text>
+
+  <!-- issues (center) -->
+  <rect x="380" y="340" width="340" height="160" rx="6" fill="#fde7e3" stroke="#c84a3a" stroke-width="1.5"/>
+  <text x="550" y="362" text-anchor="middle" fill="#c84a3a" font-weight="700">issues   ★ unit of work</text>
+  <line x1="396" y1="370" x2="704" y2="370" stroke="#c84a3a"/>
+  <text x="396" y="386">id (PK) · issue_number + identifier (PAP-123)</text>
+  <text x="396" y="400">company_id (FK) · project_id (FK)</text>
+  <text x="396" y="414">parent_id (FK self)  ★ tree</text>
+  <text x="396" y="428">status: backlog/todo/in_progress/in_review/blocked/done/cancelled</text>
+  <text x="396" y="442">assignee_agent_id  XOR  assignee_user_id</text>
+  <text x="396" y="456">checkout_run_id · execution_run_id  ★ atomic</text>
+  <text x="396" y="470">execution_policy (jsonb) · billing_code · origin_kind/id</text>
+  <text x="396" y="484">blockers via issue_relations (PATCH blockedByIssueIds)</text>
+
+  <!-- heartbeat_runs -->
+  <rect x="60" y="350" width="220" height="120" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="170" y="370" text-anchor="middle" fill="#1a1a2e" font-weight="700">heartbeat_runs</text>
+  <line x1="76" y1="378" x2="264" y2="378" stroke="#1a1a2e"/>
+  <text x="76" y="394">id (PK)</text>
+  <text x="76" y="408">company_id · agent_id</text>
+  <text x="76" y="422">invocation_source · trigger_detail</text>
+  <text x="76" y="436">status · started_at · finished_at</text>
+  <text x="76" y="450">wakeup_request_id? · usage_json · result_json</text>
+  <text x="76" y="464">log_store · log_ref · stdout/stderr_excerpt</text>
+
+  <!-- issue children clusters -->
+  <rect x="760" y="320" width="220" height="60" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="870" y="340" text-anchor="middle" fill="#1a1a2e" font-weight="700">issue_comments</text>
+  <text x="870" y="358" text-anchor="middle" fill="#5b5b62">author · markdown · type</text>
+  <text x="870" y="372" text-anchor="middle" fill="#5b5b62">interaction · approval ref</text>
+
+  <rect x="760" y="390" width="220" height="50" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="870" y="408" text-anchor="middle" fill="#1a1a2e" font-weight="700">issue_documents</text>
+  <text x="870" y="424" text-anchor="middle" fill="#5b5b62">spec · plan · revisions</text>
+
+  <rect x="760" y="450" width="220" height="50" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="870" y="468" text-anchor="middle" fill="#1a1a2e" font-weight="700">issue_attachments + work_products</text>
+  <text x="870" y="484" text-anchor="middle" fill="#5b5b62">storage refs · MIME · size</text>
+
+  <!-- cost_events -->
+  <rect x="60" y="520" width="320" height="140" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="220" y="540" text-anchor="middle" fill="#1a1a2e" font-weight="700">cost_events</text>
+  <line x1="76" y1="548" x2="364" y2="548" stroke="#1a1a2e"/>
+  <text x="76" y="564">id (PK) · occurred_at · created_at</text>
+  <text x="76" y="578">company_id · agent_id (FK)</text>
+  <text x="76" y="592">issue_id · project_id · goal_id (FK nullable)</text>
+  <text x="76" y="606">heartbeat_run_id (FK)</text>
+  <text x="76" y="620">provider · biller · billing_type · model</text>
+  <text x="76" y="634">input_tokens · cached_input_tokens · output_tokens</text>
+  <text x="76" y="648">cost_cents · billing_code</text>
+
+  <!-- budget_policies + incidents -->
+  <rect x="400" y="520" width="240" height="80" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="520" y="540" text-anchor="middle" fill="#1a1a2e" font-weight="700">budget_policies</text>
+  <text x="520" y="558" text-anchor="middle" fill="#5b5b62">scope · period · soft/hard limits</text>
+  <text x="520" y="574" text-anchor="middle" fill="#5b5b62">company / agent / project</text>
+  <text x="520" y="590" text-anchor="middle" fill="#5b5b62">action_on_breach</text>
+
+  <rect x="400" y="612" width="240" height="48" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="520" y="630" text-anchor="middle" fill="#1a1a2e" font-weight="700">budget_incidents</text>
+  <text x="520" y="646" text-anchor="middle" fill="#5b5b62">policy_id · threshold_type (soft/hard) · status · amount_limit/observed</text>
+
+  <!-- activity_log -->
+  <rect x="660" y="520" width="320" height="80" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="820" y="540" text-anchor="middle" fill="#1a1a2e" font-weight="700">activity_log</text>
+  <text x="820" y="558" text-anchor="middle" fill="#5b5b62">company_id · actor_type (system/user/agent) · actor_id</text>
+  <text x="820" y="574" text-anchor="middle" fill="#5b5b62">action · entity_type · entity_id · details (jsonb) · run_id?</text>
+  <text x="820" y="590" text-anchor="middle" fill="#5b5b62">immutable audit trail</text>
+
+  <!-- agent_api_keys / board -->
+  <rect x="660" y="612" width="320" height="48" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="820" y="630" text-anchor="middle" fill="#1a1a2e" font-weight="700">agent_api_keys · board_api_keys · agent_runtime_state</text>
+  <text x="820" y="646" text-anchor="middle" fill="#5b5b62">hashed at rest · scoped to company</text>
+
+  <!-- relations -->
+  <path d="M550,120 L170,180" stroke="#5b5b62" stroke-width="1" marker-end="url(#merc)"/>
+  <path d="M550,120 L410,180" stroke="#5b5b62" stroke-width="1" marker-end="url(#merc)"/>
+  <path d="M550,120 L630,180" stroke="#5b5b62" stroke-width="1" marker-end="url(#merc)"/>
+  <path d="M550,120 L860,180" stroke="#5b5b62" stroke-width="1" marker-end="url(#merc)"/>
+
+  <path d="M170,300 L520,340" stroke="#5b5b62" stroke-width="1" marker-end="url(#merc)"/>
+  <path d="M630,280 L600,340" stroke="#5b5b62" stroke-width="1" marker-end="url(#merc)"/>
+  <path d="M410,280 L520,340" stroke="#5b5b62" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#merc)"/>
+  <path d="M860,280 L720,360" stroke="#5b5b62" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#merc)"/>
+
+  <path d="M280,420 L380,420" stroke="#5b5b62" stroke-width="1" marker-end="url(#merc)"/>
+  <path d="M720,400 L760,400" stroke="#5b5b62" stroke-width="1" marker-end="url(#merc)"/>
+  <path d="M720,440 L760,415" stroke="#5b5b62" stroke-width="1" marker-end="url(#merc)"/>
+  <path d="M720,470 L760,475" stroke="#5b5b62" stroke-width="1" marker-end="url(#merc)"/>
+
+  <!-- cost links -->
+  <path d="M170,470 L170,520" stroke="#5b5b62" stroke-width="1" marker-end="url(#merc)"/>
+  <path d="M380,500 L300,520" stroke="#5b5b62" stroke-width="1" marker-end="url(#merc)"/>
+  <path d="M550,120 C320,500 220,510 220,520" stroke="#5b5b62" stroke-width="0.6" stroke-dasharray="2 3" opacity="0.5"/>
+  <path d="M550,500 L520,520" stroke="#5b5b62" stroke-width="1" marker-end="url(#merc)"/>
+  <path d="M550,500 L820,520" stroke="#5b5b62" stroke-width="1" marker-end="url(#merc)"/>
+</svg>

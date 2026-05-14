@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 600" font-family="'Inter','Noto Sans KR',sans-serif" font-size="12">
+  <defs>
+    <marker id="m6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1a1a2e"/>
+    </marker>
+    <marker id="m6r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c84a3a"/>
+    </marker>
+  </defs>
+  <rect width="1100" height="600" fill="#fafafa"/>
+
+  <!-- States -->
+  <g font-weight="700">
+  <rect x="40" y="60" width="160" height="56" rx="28" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="120" y="86" text-anchor="middle" fill="#1a1a2e">backlog</text>
+  <text x="120" y="102" text-anchor="middle" fill="#5b5b62" font-weight="400" font-size="11">no expectation</text>
+
+  <rect x="260" y="60" width="160" height="56" rx="28" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="340" y="86" text-anchor="middle" fill="#1a1a2e">todo</text>
+  <text x="340" y="102" text-anchor="middle" fill="#5b5b62" font-weight="400" font-size="11">actionable · dispatchable</text>
+
+  <rect x="480" y="60" width="180" height="56" rx="28" fill="#fde7e3" stroke="#c84a3a" stroke-width="1.5"/>
+  <text x="570" y="86" text-anchor="middle" fill="#c84a3a">in_progress</text>
+  <text x="570" y="102" text-anchor="middle" fill="#5b5b62" font-weight="400" font-size="11">live execution required</text>
+
+  <rect x="720" y="60" width="160" height="56" rx="28" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="800" y="86" text-anchor="middle" fill="#1a1a2e">in_review</text>
+  <text x="800" y="102" text-anchor="middle" fill="#5b5b62" font-weight="400" font-size="11">awaits reviewer</text>
+
+  <rect x="940" y="60" width="140" height="56" rx="28" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="1010" y="86" text-anchor="middle" fill="#1a1a2e">done</text>
+  <text x="1010" y="102" text-anchor="middle" fill="#5b5b62" font-weight="400" font-size="11">terminal ✓</text>
+
+  <rect x="380" y="240" width="160" height="56" rx="28" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="460" y="266" text-anchor="middle" fill="#1a1a2e">blocked</text>
+  <text x="460" y="282" text-anchor="middle" fill="#5b5b62" font-weight="400" font-size="11">explicit waiting</text>
+
+  <rect x="940" y="240" width="140" height="56" rx="28" fill="#ffffff" stroke="#5b5b62"/>
+  <text x="1010" y="266" text-anchor="middle" fill="#5b5b62">cancelled</text>
+  <text x="1010" y="282" text-anchor="middle" fill="#5b5b62" font-weight="400" font-size="11">terminal ✕</text>
+  </g>
+
+  <!-- Transitions -->
+  <g stroke="#1a1a2e" stroke-width="1.4" fill="none">
+    <path d="M200,88 L260,88" marker-end="url(#m6)"/>
+    <path d="M420,88 L478,88" marker-end="url(#m6)"/>
+    <path d="M660,88 L718,88" marker-end="url(#m6)"/>
+    <path d="M880,88 L938,88" marker-end="url(#m6)"/>
+  </g>
+  <text x="230" y="80" text-anchor="middle" font-size="10" fill="#5b5b62">assign / accept</text>
+  <text x="449" y="80" text-anchor="middle" font-size="10" fill="#c84a3a">atomic checkout</text>
+  <text x="689" y="80" text-anchor="middle" font-size="10" fill="#5b5b62">handoff</text>
+  <text x="909" y="80" text-anchor="middle" font-size="10" fill="#5b5b62">approved</text>
+
+  <!-- back-edges -->
+  <g stroke="#1a1a2e" stroke-width="1.2" fill="none" stroke-dasharray="3 3">
+    <path d="M720,108 C660,160 540,160 480,108" marker-end="url(#m6)"/>
+    <path d="M260,108 C220,160 180,160 120,108" marker-end="url(#m6)"/>
+  </g>
+  <text x="600" y="155" text-anchor="middle" font-size="10" fill="#5b5b62">request changes → back to in_progress</text>
+  <text x="190" y="155" text-anchor="middle" font-size="10" fill="#5b5b62">unassign</text>
+
+  <!-- to blocked -->
+  <g stroke="#c84a3a" stroke-width="1.4" fill="none">
+    <path d="M340,116 C340,180 380,220 400,240" marker-end="url(#m6r)"/>
+    <path d="M570,116 C540,180 500,220 480,240" marker-end="url(#m6r)"/>
+  </g>
+  <text x="356" y="180" font-size="10" fill="#c84a3a">block-on dependency</text>
+  <text x="500" y="180" font-size="10" fill="#c84a3a">stranded → recovery</text>
+
+  <!-- blocked back to in_progress -->
+  <g stroke="#1a1a2e" stroke-width="1.2" fill="none" stroke-dasharray="3 3">
+    <path d="M540,260 C620,200 620,160 570,116" marker-end="url(#m6)"/>
+  </g>
+  <text x="610" y="200" font-size="10" fill="#5b5b62">issue_blockers_resolved wake</text>
+
+  <!-- cancel from any state -->
+  <g stroke="#5b5b62" stroke-width="1" fill="none" stroke-dasharray="2 3">
+    <path d="M540,266 L938,266" marker-end="url(#m6)"/>
+    <path d="M460,116 C700,260 850,260 940,260" marker-end="url(#m6)"/>
+    <path d="M120,116 C400,200 700,260 940,260" marker-end="url(#m6)"/>
+  </g>
+  <text x="730" y="258" font-size="10" fill="#5b5b62">cancel · governance override</text>
+
+  <!-- Notes column -->
+  <g font-size="11" fill="#1a1a2e">
+    <rect x="40" y="360" width="1020" height="218" rx="6" fill="#ffffff" stroke="#0f2c59"/>
+    <text x="60" y="384" font-weight="700" fill="#0f2c59">Health invariants  ·  doc/execution-semantics.md</text>
+
+    <text x="60" y="406" font-weight="700">①  in_progress (agent-owned)</text>
+    <text x="60" y="422" fill="#5b5b62">live run | queued continuation | active monitor | open recovery issue</text>
+
+    <text x="60" y="442" font-weight="700">②  todo (agent-assigned)</text>
+    <text x="60" y="458" fill="#5b5b62">queued wake path | resting after completed heartbeat | explicit recovery surface</text>
+
+    <text x="60" y="478" font-weight="700">③  in_review</text>
+    <text x="60" y="494" fill="#5b5b62">typed participant | pending interaction · approval | human owner | active monitor | recovery</text>
+
+    <text x="60" y="514" font-weight="700">④  blocked</text>
+    <text x="60" y="530" fill="#5b5b62">first-class blockers leaf is healthy | explicit recovery issue | named external owner</text>
+
+    <text x="60" y="552" font-weight="700">⑤  Atomic checkout invariant</text>
+    <text x="60" y="568" fill="#5b5b62">UPDATE issues SET checkout_run_id=$rid, status='in_progress' WHERE id=$id AND checkout_run_id IS NULL</text>
+  </g>
+</svg>

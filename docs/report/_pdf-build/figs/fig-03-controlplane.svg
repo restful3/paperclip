@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" font-family="'Inter','Noto Sans KR',sans-serif" font-size="12">
+  <defs>
+    <marker id="m3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1a1a2e"/>
+    </marker>
+  </defs>
+  <rect width="960" height="600" fill="#fafafa"/>
+
+  <!-- Outer container = server/src -->
+  <rect x="20" y="36" width="920" height="552" rx="10" fill="#ffffff" stroke="#0f2c59" stroke-width="1.5"/>
+  <text x="40" y="28" fill="#0f2c59" font-size="11" letter-spacing="2" font-weight="700">server/src — Express orchestration host</text>
+
+  <!-- Inbound -->
+  <rect x="40" y="56" width="200" height="60" rx="6" fill="#dde7f3" stroke="#0f2c59"/>
+  <text x="140" y="78" text-anchor="middle" fill="#0f2c59" font-weight="700">app.ts · index.ts</text>
+  <text x="140" y="96" text-anchor="middle" fill="#5b5b62">bootstrap · config-file</text>
+  <text x="140" y="110" text-anchor="middle" fill="#5b5b62">middleware chain</text>
+
+  <rect x="260" y="56" width="200" height="60" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="360" y="78" text-anchor="middle" fill="#1a1a2e" font-weight="700">auth/</text>
+  <text x="360" y="96" text-anchor="middle" fill="#5b5b62">Better Auth · sessions</text>
+  <text x="360" y="110" text-anchor="middle" fill="#5b5b62">agent_api_keys · board claim</text>
+
+  <rect x="480" y="56" width="200" height="60" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="580" y="78" text-anchor="middle" fill="#1a1a2e" font-weight="700">middleware/</text>
+  <text x="580" y="96" text-anchor="middle" fill="#5b5b62">company access checks</text>
+  <text x="580" y="110" text-anchor="middle" fill="#5b5b62">log redaction · errors</text>
+
+  <rect x="700" y="56" width="220" height="60" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="810" y="78" text-anchor="middle" fill="#1a1a2e" font-weight="700">realtime/  ·  WebSocket</text>
+  <text x="810" y="96" text-anchor="middle" fill="#5b5b62">/api/companies/:cid/events/ws</text>
+  <text x="810" y="110" text-anchor="middle" fill="#5b5b62">push to UI · run logs</text>
+
+  <!-- Routes -->
+  <rect x="40" y="140" width="880" height="92" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="60" y="160" fill="#1a1a2e" font-weight="700">routes/  ·  /api/*</text>
+  <g font-size="11" fill="#1a1a2e">
+    <text x="60" y="180">companies</text><text x="60" y="196">agents</text><text x="60" y="212">issues</text><text x="60" y="228">issue-tree-control</text>
+    <text x="180" y="180">approvals</text><text x="180" y="196">projects</text><text x="180" y="212">goals</text><text x="180" y="228">routines</text>
+    <text x="300" y="180">adapters</text><text x="300" y="196">access · authz</text><text x="300" y="212">company-skills</text><text x="300" y="228">workspace-runtime</text>
+    <text x="440" y="180">costs</text><text x="440" y="196">dashboard</text><text x="440" y="212">activity</text><text x="440" y="228">sidebar-badges</text>
+    <text x="560" y="180">environments</text><text x="560" y="196">execution-workspaces</text><text x="560" y="212">environment-selection</text><text x="560" y="228">assets</text>
+    <text x="720" y="180">plugins</text><text x="720" y="196">plugin-ui-static</text><text x="720" y="212">secrets</text><text x="720" y="228">health · llms</text>
+  </g>
+
+  <!-- Services -->
+  <rect x="40" y="252" width="880" height="124" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="60" y="272" fill="#1a1a2e" font-weight="700">services/  ·  domain orchestration</text>
+  <g font-size="11" fill="#1a1a2e">
+    <text x="60" y="294" font-weight="600">Heartbeat</text>
+    <text x="60" y="312" fill="#5b5b62">heartbeat-run-summary</text>
+    <text x="60" y="328" fill="#5b5b62">cron · scheduler</text>
+    <text x="60" y="344" fill="#5b5b62">recovery/* (stranded)</text>
+    <text x="60" y="360" fill="#5b5b62">agent-start-lock</text>
+
+    <text x="220" y="294" font-weight="600">Issue lifecycle</text>
+    <text x="220" y="312" fill="#5b5b62">checkout (atomic)</text>
+    <text x="220" y="328" fill="#5b5b62">execution-policy</text>
+    <text x="220" y="344" fill="#5b5b62">issue-thread-interactions</text>
+    <text x="220" y="360" fill="#5b5b62">documents · feedback</text>
+
+    <text x="380" y="294" font-weight="600">Agents · org</text>
+    <text x="380" y="312" fill="#5b5b62">agents · agent-instructions</text>
+    <text x="380" y="328" fill="#5b5b62">agent-permissions</text>
+    <text x="380" y="344" fill="#5b5b62">company-member-roles</text>
+    <text x="380" y="360" fill="#5b5b62">approvals</text>
+
+    <text x="540" y="294" font-weight="600">Cost · budgets</text>
+    <text x="540" y="312" fill="#5b5b62">costs · finance</text>
+    <text x="540" y="328" fill="#5b5b62">budgets (soft+hard)</text>
+    <text x="540" y="344" fill="#5b5b62">activity-log</text>
+    <text x="540" y="360" fill="#5b5b62">company-portability</text>
+
+    <text x="700" y="294" font-weight="600">Workspaces · runtime</text>
+    <text x="700" y="312" fill="#5b5b62">execution-workspaces</text>
+    <text x="700" y="328" fill="#5b5b62">environment-runtime</text>
+    <text x="700" y="344" fill="#5b5b62">environment-probe</text>
+    <text x="700" y="360" fill="#5b5b62">workspace-runtime-svc</text>
+  </g>
+
+  <!-- Adapter dispatcher -->
+  <rect x="40" y="396" width="420" height="80" rx="6" fill="#fde7e3" stroke="#c84a3a"/>
+  <text x="250" y="418" text-anchor="middle" fill="#c84a3a" font-weight="700">adapters/</text>
+  <text x="250" y="436" text-anchor="middle" fill="#5b5b62">dispatch by adapter_type</text>
+  <text x="250" y="452" text-anchor="middle" fill="#5b5b62">invoke / status / cancel</text>
+  <text x="250" y="468" text-anchor="middle" fill="#5b5b62">cost-report ingestion</text>
+
+  <!-- Storage / DB -->
+  <rect x="480" y="396" width="220" height="80" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="590" y="418" text-anchor="middle" fill="#1a1a2e" font-weight="700">storage/</text>
+  <text x="590" y="436" text-anchor="middle" fill="#5b5b62">local_disk · S3</text>
+  <text x="590" y="452" text-anchor="middle" fill="#5b5b62">attachments</text>
+  <text x="590" y="468" text-anchor="middle" fill="#5b5b62">work products</text>
+
+  <rect x="720" y="396" width="200" height="80" rx="6" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="820" y="418" text-anchor="middle" fill="#1a1a2e" font-weight="700">secrets/</text>
+  <text x="820" y="436" text-anchor="middle" fill="#5b5b62">local_encrypted</text>
+  <text x="820" y="452" text-anchor="middle" fill="#5b5b62">master.key</text>
+  <text x="820" y="468" text-anchor="middle" fill="#5b5b62">company_secrets versions</text>
+
+  <!-- DB at bottom -->
+  <rect x="40" y="496" width="880" height="72" rx="6" fill="#dde7f3" stroke="#0f2c59"/>
+  <text x="480" y="518" text-anchor="middle" fill="#0f2c59" font-weight="700">PostgreSQL — packages/db (Drizzle)</text>
+  <text x="480" y="536" text-anchor="middle" fill="#5b5b62">embedded-postgres (~/.paperclip/instances/default/db) · Docker · Supabase</text>
+  <text x="480" y="554" text-anchor="middle" fill="#5b5b62">75+ tables · activity_log · cost_events · heartbeat_runs · issue_*</text>
+
+  <!-- arrows -->
+  <path d="M140,116 L140,140" stroke="#1a1a2e" stroke-width="1" marker-end="url(#m3)"/>
+  <path d="M460,232 L460,252" stroke="#1a1a2e" stroke-width="1" marker-end="url(#m3)"/>
+  <path d="M250,376 L250,396" stroke="#1a1a2e" stroke-width="1" marker-end="url(#m3)"/>
+  <path d="M460,376 L460,496" stroke="#1a1a2e" stroke-width="1" marker-end="url(#m3)"/>
+  <path d="M820,116 L820,140" stroke="#1a1a2e" stroke-width="1" marker-end="url(#m3)"/>
+</svg>

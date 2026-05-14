@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 600" font-family="'Inter','Noto Sans KR',sans-serif" font-size="12">
+  <defs>
+    <marker id="m9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1a1a2e"/>
+    </marker>
+    <marker id="m9r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c84a3a"/>
+    </marker>
+  </defs>
+  <rect width="1100" height="600" fill="#fafafa"/>
+
+  <!-- Stage 1 ingestion -->
+  <rect x="40" y="50" width="220" height="120" rx="8" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="150" y="74" text-anchor="middle" fill="#1a1a2e" font-weight="700">Stage 1  ·  Ingestion</text>
+  <text x="150" y="92" text-anchor="middle" fill="#5b5b62" font-size="11">Agent reports usage</text>
+  <text x="150" y="108" text-anchor="middle" fill="#5b5b62" font-size="11">POST /api/cost-events</text>
+  <text x="150" y="128" text-anchor="middle" fill="#1a1a2e" font-size="11">{ provider, model, biller,</text>
+  <text x="150" y="142" text-anchor="middle" fill="#1a1a2e" font-size="11">  input_tokens, cached_input_tokens,</text>
+  <text x="150" y="156" text-anchor="middle" fill="#1a1a2e" font-size="11">  output_tokens, billing_code }</text>
+
+  <!-- Stage 2 normalization -->
+  <rect x="300" y="50" width="220" height="120" rx="8" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="410" y="74" text-anchor="middle" fill="#1a1a2e" font-weight="700">Stage 2  ·  Normalization</text>
+  <text x="410" y="96" text-anchor="middle" fill="#5b5b62" font-size="11">price → cost_cents</text>
+  <text x="410" y="112" text-anchor="middle" fill="#5b5b62" font-size="11">model registry lookup</text>
+  <text x="410" y="128" text-anchor="middle" fill="#5b5b62" font-size="11">cached vs uncached split</text>
+  <text x="410" y="144" text-anchor="middle" fill="#5b5b62" font-size="11">currency = USD cents</text>
+
+  <!-- Stage 3 attribution -->
+  <rect x="560" y="50" width="220" height="120" rx="8" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="670" y="74" text-anchor="middle" fill="#1a1a2e" font-weight="700">Stage 3  ·  Attribution</text>
+  <text x="670" y="96" text-anchor="middle" fill="#5b5b62" font-size="11">issue → project → goal</text>
+  <text x="670" y="112" text-anchor="middle" fill="#5b5b62" font-size="11">project: coalesce(cost.project_id, run→activity→issue)</text>
+  <text x="670" y="128" text-anchor="middle" fill="#5b5b62" font-size="11">heartbeat_run_id → run</text>
+  <text x="670" y="144" text-anchor="middle" fill="#5b5b62" font-size="11">billing_code: free-form label (not a rollup key)</text>
+
+  <!-- Stage 4 rollup -->
+  <rect x="820" y="50" width="240" height="120" rx="8" fill="#dde7f3" stroke="#0f2c59"/>
+  <text x="940" y="74" text-anchor="middle" fill="#0f2c59" font-weight="700">Stage 4  ·  Rollup</text>
+  <text x="940" y="96" text-anchor="middle" fill="#5b5b62" font-size="11">agent.spent_monthly_cents</text>
+  <text x="940" y="112" text-anchor="middle" fill="#5b5b62" font-size="11">project.spent</text>
+  <text x="940" y="128" text-anchor="middle" fill="#5b5b62" font-size="11">company.spent_monthly_cents</text>
+  <text x="940" y="144" text-anchor="middle" fill="#5b5b62" font-size="11">UTC monthly window</text>
+
+  <path d="M260,110 L300,110" stroke="#1a1a2e" stroke-width="1.4" marker-end="url(#m9)"/>
+  <path d="M520,110 L560,110" stroke="#1a1a2e" stroke-width="1.4" marker-end="url(#m9)"/>
+  <path d="M780,110 L820,110" stroke="#1a1a2e" stroke-width="1.4" marker-end="url(#m9)"/>
+
+  <!-- Stage 5 policy gauge -->
+  <rect x="40" y="220" width="500" height="200" rx="8" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="60" y="244" fill="#1a1a2e" font-weight="700">Stage 5  ·  Policy evaluation  ·  budget_policies</text>
+
+  <!-- Gauge bar -->
+  <rect x="60" y="270" width="460" height="28" fill="#f3f3f5" stroke="#d4d4d8"/>
+  <rect x="60" y="270" width="276" height="28" fill="#dde7f3"/>
+  <rect x="60" y="270" width="368" height="28" fill="#fde7e3"/>
+  <line x1="368" y1="262" x2="368" y2="306" stroke="#1a1a2e" stroke-width="1.2"/>
+  <line x1="424" y1="262" x2="424" y2="306" stroke="#c84a3a" stroke-width="1.5"/>
+  <line x1="520" y1="262" x2="520" y2="306" stroke="#1a1a2e" stroke-width="1.2"/>
+  <text x="60" y="316" font-size="10" fill="#5b5b62">$0</text>
+  <text x="368" y="316" text-anchor="middle" font-size="10" fill="#1a1a2e">soft alert · 80%</text>
+  <text x="424" y="316" text-anchor="middle" font-size="10" fill="#c84a3a">hard ceiling · 100%</text>
+  <text x="520" y="316" text-anchor="end" font-size="10" fill="#5b5b62">limit</text>
+
+  <text x="60" y="346" fill="#1a1a2e" font-weight="600">Decision tree</text>
+  <text x="60" y="364" fill="#5b5b62">spent &lt; soft  →  no-op (visibility only)</text>
+  <text x="60" y="382" fill="#5b5b62">soft ≤ spent &lt; hard  →  notify board · log incident</text>
+  <text x="60" y="400" fill="#c84a3a" font-weight="600">spent ≥ hard  →  pause agent · cancel current run · open incident</text>
+
+  <!-- Stage 6 enforcement -->
+  <rect x="580" y="220" width="480" height="200" rx="8" fill="#ffffff" stroke="#c84a3a" stroke-width="1.5"/>
+  <text x="600" y="244" fill="#c84a3a" font-weight="700">Stage 6  ·  Enforcement (hard ceiling)</text>
+
+  <g font-size="11" fill="#1a1a2e">
+    <text x="600" y="270">①  budget_incidents row: threshold_type=hard · status=open · scope=agent/company</text>
+    <text x="600" y="288">②  agents.status = paused (또는 in-flight run cancel)</text>
+    <text x="600" y="306">③  in-flight runs: graceful cancel signal → grace timeout → kill</text>
+    <text x="600" y="324">④  scheduler stops dispatching new heartbeats</text>
+    <text x="600" y="342">⑤  activity_log entry · live event (activity.logged via WebSocket)</text>
+    <text x="600" y="360" fill="#c84a3a" font-weight="600">⑥  unblock requires Board (raise limit / acknowledge / linked approval)</text>
+    <text x="600" y="380" fill="#5b5b62">unlimited limit (=0) opt-out preserved per agent · per company</text>
+    <text x="600" y="398" fill="#5b5b62">delegation: CEO sets sub-budgets for direct reports</text>
+  </g>
+
+  <!-- Bottom: cost view aggregations -->
+  <rect x="40" y="450" width="1020" height="120" rx="8" fill="#dde7f3" stroke="#0f2c59"/>
+  <text x="60" y="474" fill="#0f2c59" font-weight="700">Reads — Cost dashboard surfaces (server/src/routes/costs.ts · ui/src/pages/Costs.tsx)</text>
+  <g font-size="11" fill="#1a1a2e">
+    <text x="60" y="500">/api/companies/:companyId/costs/summary  ·  monthly burn rate</text>
+    <text x="60" y="518">/api/companies/:companyId/costs/by-agent  ·  per-agent breakdown by model · provider</text>
+    <text x="60" y="536">/api/issues/:id/cost-summary  ·  what did this unit of work cost?</text>
+    <text x="60" y="554">/api/companies/:companyId/costs/by-project  ·  cost_events.project_id ?? run→activity_log→issue.project_id</text>
+
+    <text x="540" y="500">heartbeat_run_id → run timeline</text>
+    <text x="540" y="518">cached vs uncached input share</text>
+    <text x="540" y="536">stacked per provider (Anthropic · OpenAI · Google · Cursor)</text>
+    <text x="540" y="554">CSV export · feedback share opt-in</text>
+  </g>
+</svg>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="124px" preserveAspectRatio="none" style="width:406px;height:124px;background:#FFFFFF;" version="1.1" viewBox="0 0 406 124" width="406px" zoomAndPan="magnify"><defs/><g><g id="elem_SendingServer"><rect fill="#F7F8FE" height="36.2969" style="stroke:#070D4A;stroke-width:0.5;" width="115" x="7" y="20.5659"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="14" y="35.561">SendingServer</text><line style="stroke:#070D4A;stroke-width:0.5;" x1="8" x2="121" y1="40.8628" y2="40.8628"/></g><g id="elem_ReceivingServer"><rect fill="#F7F8FE" height="36.2969" style="stroke:#070D4A;stroke-width:0.5;" width="125" x="271" y="20.5659"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="111" x="278" y="35.561">ReceivingServer</text><line style="stroke:#070D4A;stroke-width:0.5;" x1="272" x2="395" y1="40.8628" y2="40.8628"/></g><g id="elem_GMN5"><path d="M267,92.0659 L267,117.1987 A0,0 0 0 0 267,117.1987 L399.6667,117.1987 A0,0 0 0 0 399.6667,117.1987 L399.6667,102.0659 L389.6667,92.0659 L337.5,92.0659 L333.5,56.9059 L329.5,92.0659 L267,92.0659 A0,0 0 0 0 267,92.0659 " fill="#F7F8FE" style="stroke:#181818;stroke-width:0.5;"/><path d="M389.6667,92.0659 L389.6667,102.0659 L399.6667,102.0659 L389.6667,92.0659 " fill="#F7F8FE" style="stroke:#181818;stroke-width:0.5;"/><path d="M278.3333,100.2821 C275.95,100.2821 274,102.2321 274,104.6154 C274,106.9987 275.95,108.9487 278.3333,108.9487 C279.525,108.9487 280.63,108.4829 281.41,107.6921 L280.63,106.9121 C280.045,107.4971 279.2325,107.8654 278.3225,107.8654 C276.5242,107.8654 275.0725,106.4137 275.0725,104.6154 C275.0725,102.8171 276.5242,101.3654 278.3225,101.3654 C279.2217,101.3654 280.0017,101.7554 280.5867,102.3512 L279.4058,103.5321 L282.6558,103.5321 L282.6558,100.2821 L281.3667,101.5712 C280.5867,100.7912 279.5142,100.2821 278.3225,100.2821 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="97" x="287.6667" y="109.1328">Check Every 1s</text></g><!--MD5=[724d0c23fa1d5badeba80318ae26ab5f]
+link SendingServer to ReceivingServer--><g id="link_SendingServer_ReceivingServer"><path codeLine="7" d="M122.12,38.5659 C164.13,38.5659 221.55,38.5659 265.78,38.5659 " fill="none" id="SendingServer-to-ReceivingServer" style="stroke:#070D4A;stroke-width:1.0;"/><polygon fill="#070D4A" points="270.84,38.5659,261.84,34.5659,265.84,38.5659,261.84,42.5659,270.84,38.5659" style="stroke:#070D4A;stroke-width:1.0;"/><path d="M162,10.7821 C159.6167,10.7821 157.6667,12.7321 157.6667,15.1154 C157.6667,17.4987 159.6167,19.4487 162,19.4487 C163.1917,19.4487 164.2967,18.9829 165.0767,18.1921 L164.2967,17.4121 C163.7117,17.9971 162.8992,18.3654 161.9892,18.3654 C160.1908,18.3654 158.7392,16.9137 158.7392,15.1154 C158.7392,13.3171 160.1908,11.8654 161.9892,11.8654 C162.8883,11.8654 163.6683,12.2554 164.2533,12.8512 L163.0725,14.0321 L166.3225,14.0321 L166.3225,10.7821 L165.0333,12.0712 C164.2533,11.2912 163.1808,10.7821 161.9892,10.7821 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="65" x="167.3333" y="19.6328">Heartbeat</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="83" x="153" y="34.7656">Every 100ms</text></g><!--MD5=[1d1b090d6d164de70fe344c26629d301]
+@startuml
+left to right direction
+
+!include ../style.puml 
+object SendingServer
+object ReceivingServer
+
+SendingServer - -> ReceivingServer: "<&reload>Heartbeat\nEvery 100ms"
+
+note bottom of ReceivingServer
+<&reload> Check Every 1s
+end note
+
+@enduml
+
+@startuml
+left to right direction
+
+
+skinparam shadowing false
+skinparam sequenceParticipant{
+    BackgroundColor #F7F8FE
+  BorderColor #070D4A
+}
+skinparam sequenceLifeLine {
+   BackgroundColor #F7F8FE
+  BorderColor #070D4A
+}
+skinparam sequence {
+  ArrowColor #070D4A
+}
+
+skinparam Note {
+    BackgroundColor #F7F8FE
+  BorderColor #070D4A
+}
+skinparam Node {
+    BackgroundColor #F7F8FE
+  BorderColor #070D4A
+}
+
+skinparam object {
+    BackgroundColor #F7F8FE
+  BorderColor #070D4A
+}
+
+skinparam actor {
+    BackgroundColor #F7F8FE
+  BorderColor #070D4A
+}
+
+
+
+hide footbox
+object SendingServer
+object ReceivingServer
+
+SendingServer - -> ReceivingServer: "<&reload>Heartbeat\nEvery 100ms"
+
+note bottom of ReceivingServer
+<&reload> Check Every 1s
+end note
+
+@enduml
+
+PlantUML version 1.2022.6(Tue Jun 21 23:04:49 IST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: IN
+--></g></svg>
