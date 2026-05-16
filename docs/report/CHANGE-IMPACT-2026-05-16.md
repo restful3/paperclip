@@ -77,9 +77,12 @@
 - **ordered sub-issue navigation(#5938)** — 하위 이슈 순서 탐색(+763 LOC).
 - **issue document 라이브 갱신(#6005)** — 문서 실시간 새로고침.
 
-#### `07-governance-cost` — GAP
+#### `07-governance-cost` — GAP → 반영 완료 (2026-05-16 focused follow-up)
 
-- **issue document locking(#6009)** 은 보드 운영자가 issue document 를 잠그고/푸는 신규 거버넌스 레버다(잠긴 문서는 불변, 에이전트 쓰기는 derived key 생성). 본문 보드 권한 열거(승인·예산·일시정지)에 누락. `POST /issues/:id/documents/:key/lock` · `/unlock` 2개 라우트도 05장 GAP.
+- **issue document locking(#6009)** 은 보드 운영자가 issue document 를 잠그고/푸는 신규 거버넌스 레버다(잠긴 문서는 불변, 에이전트 쓰기는 derived key 생성). 본문 보드 권한 열거(승인·예산·일시정지)에 누락.
+- **판정**: 구현 present, 문서 stale. truth source 검증 — 스키마 `documents` +3컬럼/마이그레이션 `0085`, 라우트 `routes/issues.ts:2093·2141`(board 인증 전용, 비-board `403`), 서비스 `services/documents.ts`(잠긴 키 쓰기는 board `409`·agent derived key), `activity_log` `issue.document_locked`/`_unlocked`.
+- **반영**: 07장 §3 표 1 에 "문서 락/언락" 행 추가(6→7행) + 락 시맨틱 단락 1개. → 07장 GAP 해소.
+- 미해소: `POST /issues/:id/documents/:key/lock` · `/unlock` 2개 라우트의 **05장 표 1 등재는 별건** — 06장 GAP 와 함께 잔존.
 
 ### Tier 3 — MINOR / OK
 
@@ -101,7 +104,7 @@
 | 판정 | 개수 | 챕터 |
 |---|---|---|
 | STALE | 4 | `02-data-model`, `03-runtime-execution`, `05-server-api`, `09-pros-cons` |
-| GAP | 2 | `06-ui-and-board`, `07-governance-cost` |
+| GAP | 2 | `06-ui-and-board`, `07-governance-cost` (2026-05-16 반영 완료) |
 | MINOR | 2 | `01-architecture`, `04-adapters-and-skills` |
 | OK | 13 | `00-overview`, `08-usage`, `10-research-map`, `docs/research/01\~10` |
 | **합계** | **21** | |
@@ -118,7 +121,14 @@
 - `05-server-api.md` §2·§3 — `issues.ts 168 KB` → `180 KB` (3개소)
 - `_pdf-build/` 챕터 사본 재동기화 + PDF/HTML 재빌드
 
-**GAP 2개(06 · 07)** 와 MINOR 는 본 사이클 범위 밖 — 사용자 확인 후 별도 반영 대상.
+### GAP 07 — issue document locking (2026-05-16 focused follow-up)
+
+- `07-governance-cost.md` §3 — 표 1 "항상 가용한 보드 권한" 에 "문서 락/언락" 행 추가(6→7행), 영향 반경 정렬에 "문서" 단위 추가.
+- 같은 절에 문서 락 시맨틱 단락 1개 추가 — 불변 동결, board 전용(비-board `403`), 잠긴 키 쓰기(board `409` / agent derived key), `documents` 락 컬럼 3개·마이그레이션 `0085`, `activity_log` 감사 액션.
+- `_pdf-build/07_governance-cost.md` 재동기화 + PDF/HTML 재빌드.
+- 구현은 처음부터 present — 문서 stale 만 해소.
+
+**GAP 06(UI 신규기능군)** 과 GAP 07 의 05장 라우트 등재분, MINOR 는 본 사이클 범위 밖 — 별도 반영 대상.
 
 ---
 
