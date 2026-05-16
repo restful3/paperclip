@@ -7,7 +7,7 @@ eyebrow: Independent Research Report · 독립 리서치
 title: Paperclip 학습용 분석 리포트
 subtitle: 오픈소스 자율 에이전트 control plane 의 11챕터 가이드
 author: Claude Opus 4.7 (1M context)
-date: 2026-05-09
+date: 2026-05-14
 version: Phase G+
 publisher: AI Odyssey · Independent Research
 period: "Phase A → G+"
@@ -17,8 +17,8 @@ abstract: |
 kpi_stats:
   - { value: "11", label: "Chapters" }
   - { value: "27", label: "Figures" }
-  - { value: "18", label: "Tables" }
-  - { value: "67", label: "Pages" }
+  - { value: "21", label: "Tables" }
+  - { value: "77", label: "Pages" }
 toc_pills:
   - { num: "00", title: "Overview" }
   - { num: "01", title: "Architecture" }
@@ -128,7 +128,7 @@ toc_pills:
 
 ## 그림과 표 인덱스
 
-본문에는 **자체 SVG 10장** + **외부 인용 그림 17장** + **표 18개** 가 배치되어 있다. 모두 동일한 캡션 형식 — `**그림 N. 〈제목〉**` / `**표 N. 〈제목〉**` — 으로 본문 라벨이 붙는다.
+본문에는 **자체 SVG 10장** + **외부 인용 그림 17장** + **표 21개** 가 배치되어 있다. 모두 동일한 캡션 형식 — `**그림 N. 〈제목〉**` / `**표 N. 〈제목〉**` — 으로 본문 라벨이 붙는다.
 
 | 종류 | 위치 | 라벨 |
 |---|---|---|

@@ -518,11 +518,19 @@ blockquote.pull-quote p { margin: 0; }
   --gutter: 36px;
 }
 
-/* ===== Page container ===== */
+/* ===== Page container =====
+   .page 자체는 폭/여백 제약이 없는 단순 wrapper — 본문 가독성 폭은 .body 가, 페이지 외곽 여백은 @page 가 담당.
+   이렇게 두면 표지(.cover) 가 .page max-width 트랩에 갇히지 않고 A4 풀-블리드 가능. */
 .page {
+  margin: 0;
+  padding: 0;
+}
+/* 본문 컬럼 — 좌우 외곽 여백은 @page margin 이 담당하므로 .body 자체 거터는 두지 않는다.
+   max-width 는 화면(HTML) 미리보기용 가독성 상한 — 인쇄 시에는 @page 인쇄영역이 더 좁아 무력. */
+.body {
   max-width: var(--page-width);
   margin: 0 auto;
-  padding: 64px var(--gutter) 96px;
+  padding: 0;
 }
 
 /* ===== Cover — Editorial Hero (A4 풀-블리드, 화면 가득 채움) =====
@@ -536,11 +544,12 @@ blockquote.pull-quote p { margin: 0; }
    인쇄 페이지 마진까지 0 → A4 가장자리까지 도달. */
 .cover {
   position: relative;
-  margin: -64px calc(-1 * var(--gutter)) 0 calc(-1 * var(--gutter));
+  width: 100%;
+  margin: 0;
   padding: 32mm 26mm 26mm 32mm;
-  height: 297mm;
-  min-height: 297mm;
-  max-height: 297mm;
+  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
   background:
     radial-gradient(1400px 800px at 82% 18%, rgba(37,99,235,0.08) 0%, rgba(37,99,235,0) 60%),
     radial-gradient(900px 600px at 12% 85%, rgba(15,44,89,0.06) 0%, rgba(15,44,89,0) 60%),
@@ -548,6 +557,7 @@ blockquote.pull-quote p { margin: 0; }
   color: var(--ink);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   page-break-after: always;
   break-after: page;
   overflow: hidden;
@@ -651,7 +661,7 @@ blockquote.pull-quote p { margin: 0; }
   font-weight: 500;
   font-size: 14pt;
   color: var(--ink-soft);
-  margin: 0 0 auto;
+  margin: 0;
   line-height: 1.45;
   max-width: 38ch;
   text-wrap: balance;
@@ -897,6 +907,8 @@ hr + h1 { margin-top: 1.5rem; }
   }
 }
 @page :first {
+  /* 표지 페이지는 풀-블리드 — A4 가장자리까지 .cover 가 닿도록 @page margin 자체를 0 으로 */
+  margin: 0;
   @top-left { content: none; }
   @top-right { content: none; }
   @bottom-right { content: none; }
@@ -921,9 +933,9 @@ hr + h1 { margin-top: 1.5rem; }
 <p class="subtitle">오픈소스 자율 에이전트 control plane 의 11챕터 가이드</p>
 <div class="cover-abstract"><strong>Paperclip</strong> 은 자율 에이전트들이 모인 <em>회사</em> 를 운영하는 오픈소스 <strong>control plane</strong> 이다. 보드 운영자는 승인·예산·일시정지로 거버넌스를 행사하고, 어댑터(외부 CLI · 웹훅 · 원격 게이트웨이) 가 실제 에이전트 런타임을 맡는다. 이 리포트는 <strong>11개 챕터</strong> 로 데이터 모델·런타임·어댑터·서버·UI·거버넌스를 따라가며 큰 그림을 한 권에 잡는다.
 </div>
-<div class="cover-kpi"><div class="cover-kpi__item"><span class="cover-kpi__value">11</span><span class="cover-kpi__label">Chapters</span></div><div class="cover-kpi__item"><span class="cover-kpi__value">27</span><span class="cover-kpi__label">Figures</span></div><div class="cover-kpi__item"><span class="cover-kpi__value">18</span><span class="cover-kpi__label">Tables</span></div><div class="cover-kpi__item"><span class="cover-kpi__value">67</span><span class="cover-kpi__label">Pages</span></div></div>
+<div class="cover-kpi"><div class="cover-kpi__item"><span class="cover-kpi__value">11</span><span class="cover-kpi__label">Chapters</span></div><div class="cover-kpi__item"><span class="cover-kpi__value">27</span><span class="cover-kpi__label">Figures</span></div><div class="cover-kpi__item"><span class="cover-kpi__value">21</span><span class="cover-kpi__label">Tables</span></div><div class="cover-kpi__item"><span class="cover-kpi__value">77</span><span class="cover-kpi__label">Pages</span></div></div>
 <ol class="cover-pills"><li class="cover-pill"><span class="cover-pill__num">00</span><span class="cover-pill__title">Overview</span></li><li class="cover-pill"><span class="cover-pill__num">01</span><span class="cover-pill__title">Architecture</span></li><li class="cover-pill"><span class="cover-pill__num">02</span><span class="cover-pill__title">Data Model</span></li><li class="cover-pill"><span class="cover-pill__num">03</span><span class="cover-pill__title">Runtime Execution</span></li><li class="cover-pill"><span class="cover-pill__num">04</span><span class="cover-pill__title">Adapters &amp; Skills</span></li><li class="cover-pill"><span class="cover-pill__num">05</span><span class="cover-pill__title">Server &amp; API</span></li><li class="cover-pill"><span class="cover-pill__num">06</span><span class="cover-pill__title">UI &amp; Board</span></li><li class="cover-pill"><span class="cover-pill__num">07</span><span class="cover-pill__title">Governance &amp; Cost</span></li><li class="cover-pill"><span class="cover-pill__num">08</span><span class="cover-pill__title">Usage</span></li><li class="cover-pill"><span class="cover-pill__num">09</span><span class="cover-pill__title">Pros &amp; Cons</span></li><li class="cover-pill"><span class="cover-pill__num">10</span><span class="cover-pill__title">Research Map</span></li></ol>
-<dl class="meta"><div><dt>발행</dt><dd>AI Odyssey · Independent Research</dd></div><div><dt>기간</dt><dd>Phase A → G+</dd></div><div><dt>저자</dt><dd>Claude Opus 4.7 (1M context)</dd></div><div><dt>버전</dt><dd>Phase G+</dd></div><div><dt>발행일</dt><dd>2026-05-09</dd></div></dl>
+<dl class="meta"><div><dt>발행</dt><dd>AI Odyssey · Independent Research</dd></div><div><dt>기간</dt><dd>Phase A → G+</dd></div><div><dt>저자</dt><dd>Claude Opus 4.7 (1M context)</dd></div><div><dt>버전</dt><dd>Phase G+</dd></div><div><dt>발행일</dt><dd>2026-05-14</dd></div></dl>
 </header>
 <article class="body">
 <style>
@@ -1018,7 +1030,7 @@ hr + h1 { margin-top: 1.5rem; }
 </ul>
 
 <h2>그림과 표 인덱스</h2>
-<p>본문에는 <strong>자체 SVG 10장</strong> + <strong>외부 인용 그림 17장</strong> + <strong>표 18개</strong> 가 배치되어 있다. 모두 동일한 캡션 형식 — <code>**그림 N. 〈제목〉**</code> / <code>**표 N. 〈제목〉**</code> — 으로 본문 라벨이 붙는다.</p>
+<p>본문에는 <strong>자체 SVG 10장</strong> + <strong>외부 인용 그림 17장</strong> + <strong>표 21개</strong> 가 배치되어 있다. 모두 동일한 캡션 형식 — <code>**그림 N. 〈제목〉**</code> / <code>**표 N. 〈제목〉**</code> — 으로 본문 라벨이 붙는다.</p>
 <table>
 <thead>
 <tr>
