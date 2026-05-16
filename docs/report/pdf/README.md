@@ -4,7 +4,7 @@
 
 ## 산출물
 
-- `paperclip-learning-report.pdf` (\~6.7 MB, 77 페이지) — 인쇄/배포용 PDF
+- `paperclip-learning-report.pdf` (\~6.7 MB, 75 페이지) — 인쇄/배포용 PDF
   - **풀페이지 표지** — A4 한 페이지를 가득 채우는 커버
   - **목차 페이지** — 11개 챕터 한 줄 요약 + 그림·표 인덱스 + 시각 스타일 규칙
   - **PDF outline (북마크)** — 헤딩(h1\~h6) 기반 자동 생성. PDF 뷰어 북마크 패널에서 챕터/절 단위 점프 가능
