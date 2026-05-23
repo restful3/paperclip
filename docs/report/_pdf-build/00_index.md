@@ -18,7 +18,7 @@ kpi_stats:
   - { value: "11", label: "Chapters" }
   - { value: "27", label: "Figures" }
   - { value: "21", label: "Tables" }
-  - { value: "69", label: "Pages" }
+  - { value: "72", label: "Pages" }
 toc_pills:
   - { num: "00", title: "Overview" }
   - { num: "01", title: "Architecture" }

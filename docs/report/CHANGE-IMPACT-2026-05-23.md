@@ -195,11 +195,19 @@
 - `docs/research/05-openclaw-agent-companies.md` — 패키지 9개→10개(grok-local), registry `:480-493`→`:511-524`
 - `_pdf-build/` 챕터 사본 재동기화 + PDF/HTML 재빌드
 
-### GAP 잔존 (본 사이클 미반영)
+### GAP 3건 — 2026-05-23 추가 반영 완료 (focused follow-up)
 
-- **GAP-06**(UI 면 확장: i18n locale catalog 39개, 모바일 폴리시, secret UX, devops surfaces) — 본 사이클 범위 밖, 06장 본문에 별도 절·표 신설 필요.
-- **GAP-07**(agent permissions and controls plan, #6386) — 거버넌스 표 1 7행 → 8행 확장 + principal access 호환성/environment manage 인간 기본값 단락 신설 여지. 본 사이클 범위 밖.
-- **신규 도메인 GAP**(Cloud Upstream sync, #6548) — 학습 리포트에 챕터/절 매핑 자체가 없어, 04장(어댑터/스킬) 또는 05장(서버 API) 또는 별도 신규 챕터 어디에 둘지 사용자 결정 필요.
+- **GAP-06**(UI 면 확장) — `06-ui-and-board.md` §2 표 1에 Cloud Upstream UI 행(`/company/settings/cloud-upstream`, `/ux-lab/cloud-upstream` — CloudUpstream.tsx 646 LOC + CloudUpstreamUxLab.tsx 822 LOC) 추가 + 새 절 **§2.1 "최근 추가된 UI 면 — 2026-05 사이클(#6070\~#6560)"** 신설. 6축 정리: ① i18n locale catalog 39개(#6070·#6058) ② 모바일 보드 흐름 폴리시(#6550) ③ secret/vault UX 통합(#6339·#6381) ④ dev/ops surfaces(#6384) ⑤ inbox/instance/invite 단순화(#6269·#6341·#6433) ⑥ workspace diff viewer 플러그인 UI(#6071·#6383).
+- **GAP-07**(agent permissions and controls plan, #6386) — `07-governance-cost.md` §3 표 1 뒤에 단락 "**권한 표현의 내부 호환성 보강(#6386)**" 신설. 표 1 행(7행)은 변경하지 않고, 마이그레이션 `0087·0088` + `authorization-service` +547 LOC + plugin SDK protocol/host-client-factory +156 LOC 가 *기존 권한 모델의 내부 일관성과 검증 표면을 보강한다* 는 관점으로 정리.
+- **신규 도메인 GAP**(Cloud Upstream sync, #6548) — `05-server-api.md` §2 표 1에 `cloud-upstreams.ts` 행 추가(8개 라우트 — connect/start·finish·push-runs·preview·cancel·activation), §3 디렉터리 트리에 `(cloud sync · 신규)` 군집 추가(`cloud-upstreams.ts` 48 KB), §3 본문에 단락 "**신규 도메인 — Cloud Upstream sync(#6548, 2026-05-22)**" 신설(스키마 `0089` · 서비스 +1298 LOC · UI 페이지 2개 · CLI 1195 LOC). `02-data-model.md` §6 표 2 Foundation 군집에 `cloud_upstreams` 추가.
+
+### GAP 반영 후 산출물
+
+- `_pdf-build/` 챕터 사본 4개 추가 동기화(02·05·06·07).
+- **report 포맷** 재빌드: 72 페이지 / 3.96 MB.
+- **slide 포맷** 신규 빌드: 41 페이지 / 1.10 MB — `paperclip-learning-report.slides.{html,pdf}` 로 산출.
+- 표지 KPI Pages 75 → 69 → **72** (GAP 반영 후), date `2026-05-23` 유지.
+- `docs/report/pdf/README.md` 갱신: slide 빌드 한 줄 명령 + 산출물 4종 매핑(report·slide × html·pdf).
 
 ---
 

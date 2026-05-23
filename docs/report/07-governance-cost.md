@@ -64,6 +64,8 @@ approvals {
 
 표 1 의 마지막 행 **문서 락/언락(document lock)** 은 다른 권한과 결이 다르다 — 실행을 *멈추는* 것이 아니라 산출물을 *동결* 한다. issue document(이슈에 누적되는 plan·handoff 등 작업 산출물)는 에이전트가 같은 키로 계속 개정하므로, 보드가 승인한 스냅샷이 이후 쓰기로 덮일 위험이 있다. 락이 걸린 문서는 불변이 되어 보드 본인의 수정·삭제·복원조차 언락 전에는 `409` 로 거부된다. 락/언락 라우트는 board 인증 전용이라 비-board 행위자는 `403` 을 받는다. 에이전트가 잠긴 키에 쓰면 덮어쓰기 대신 `plan-2` 같은 **파생 키(derived key)** 로 새 문서를 만든다 — 에이전트 작업은 막히지 않되 승인본은 보존된다. 락 상태는 `documents` 테이블의 `locked_at` · `locked_by_agent_id` · `locked_by_user_id` 세 컬럼(마이그레이션 `0085`)에 들고, 락/언락은 `activity_log` 에 `issue.document_locked` · `issue.document_unlocked` 로 감사 흔적을 남긴다(`server/src/routes/issues.ts:2548·2596`).
 
+**권한 표현의 내부 호환성 보강(#6386, 2026-05-22)** — 보드 권한 표면(표 1) 자체는 그대로 두되, 권한 표현의 내부 일관성을 두 마이그레이션으로 보강했다. `0087_backfill_environment_manage_human_defaults` 는 사람 행위자의 environment manage 기본값을 backfill 하고, `0088_backfill_principal_access_compatibility` 는 principal access 의 하위 호환성 컬럼을 채운다. `authorization-service` 가 +547 LOC 확장되어 agent permissions · principal access 의 결정 경로를 단일 서비스로 모았고, plugin SDK(`packages/plugins/sdk/src/protocol.ts`, `host-client-factory.ts`) 가 +156 LOC 확장되어 플러그인이 board 권한을 invocation scope 차원에서 검증받는 통로가 단단해졌다. 즉 이 변경은 표 1 의 *행을 늘리는 것이 아니라*, 기존 행이 표현하는 권한 모델의 *내부 일관성과 검증 표면*을 보강한다 — 보드 운영자 시점에서 새 권한 레버를 익힐 필요는 없지만, 에이전트가 환경/시크릿/플러그인 호출을 요청할 때 거부 결정이 더 정합적으로 일어난다.
+
 ## 4. 예산 — 회사가 통제할 수 있는 가장 큰 변수
 
 LLM 호출 비용은 자율 에이전트 회사의 가장 큰 위험이다. Paperclip은 **3-tier 예산 모델**을 코어로 둔다.

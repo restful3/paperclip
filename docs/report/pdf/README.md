@@ -4,12 +4,14 @@
 
 ## 산출물
 
-- `paperclip-learning-report.pdf` (\~4.1 MB, 69 페이지) — 인쇄/배포용 PDF
+- `paperclip-learning-report.pdf` (\~4.0 MB, 72 페이지) — 인쇄/배포용 PDF (**report 포맷** — A4 도큐먼트)
   - **풀페이지 표지** — A4 한 페이지를 가득 채우는 커버
   - **목차 페이지** — 11개 챕터 한 줄 요약 + 그림·표 인덱스 + 시각 스타일 규칙
   - **PDF outline (북마크)** — 헤딩(h1\~h6) 기반 자동 생성. PDF 뷰어 북마크 패널에서 챕터/절 단위 점프 가능
   - **그림·표 통일 캡션** — 모든 그림/표 위에 `**그림 N. 〈제목〉**` / `**표 N. 〈제목〉**` 형식의 본문 라벨
 - `paperclip-learning-report.html` — 같은 본문의 HTML 미리보기
+- `paperclip-learning-report.slides.pdf` (\~1.1 MB, 41 페이지) — 발표용 슬라이드 PDF (**slide 포맷** — 가로 16:9)
+- `paperclip-learning-report.slides.html` — 같은 본문의 슬라이드 HTML 미리보기
 - `figs/` — PDF/HTML 이 참조하는 SVG/이미지 자산 (28개)
 
 ## 빌드 환경
@@ -26,12 +28,23 @@
 
 ```bash
 cd /home/restful3/workspace/slideflow
+
+# (1) report 포맷 — A4 도큐먼트
 uv run python build.py \
     /home/restful3/workspace/paperclip/docs/report/_pdf-build \
     --theme research --brand ai-odyssey --pdf
 
-# 산출물 → /home/restful3/workspace/slideflow/dist/report/_pdf-build--research--ai-odyssey.{html,pdf}
-# 그 뒤 docs/report/pdf/ 로 복사
+# (2) slide 포맷 — 가로 16:9 발표용 (선택)
+uv run python build.py \
+    /home/restful3/workspace/paperclip/docs/report/_pdf-build \
+    --theme research --brand ai-odyssey --format slide --pdf
+
+# 산출물 → /home/restful3/workspace/slideflow/dist/report/
+#   · _pdf-build--research--ai-odyssey.{html,pdf}            (report)
+#   · _pdf-build--research--ai-odyssey--slide.{html,pdf}     (slide)
+# 그 뒤 docs/report/pdf/ 로 복사:
+#   · *.{html,pdf}        → paperclip-learning-report.{html,pdf}
+#   · *--slide.{html,pdf} → paperclip-learning-report.slides.{html,pdf}
 ```
 
 > slideflow `build.py` 가 Chrome `--generate-pdf-document-outline` 플래그를 자동 부착하므로, 별도 옵션 없이 PDF 북마크가 자동 생성된다. 헤딩 구조가 본문에 잘 잡혀 있으면 그대로 동작.

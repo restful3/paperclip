@@ -79,7 +79,7 @@ UPDATE issues
 
 | 도메인 | 핵심 테이블 | 부속 테이블 (예시) |
 |---|---|---|
-| **Foundation** | `companies`, `users` (Better Auth), `instance_*`, `auth.*` | `company_memberships`, `instance_user_roles`, `cli_auth_challenges`, `invites`, `join_requests`, `board_api_keys` |
+| **Foundation** | `companies`, `users` (Better Auth), `instance_*`, `auth.*` | `company_memberships`, `instance_user_roles`, `cli_auth_challenges`, `invites`, `join_requests`, `board_api_keys`, `cloud_upstreams` (#6548 신규 — 마이그레이션 `0089`, local → cloud 회사 동기화) |
 | **Agents & runtime** | `agents`, `agent_api_keys`, `heartbeat_runs` | `agent_config_revisions`, `agent_runtime_state`, `agent_task_sessions`, `agent_wakeup_requests`, `environments`, `environment_leases` |
 | **Work** | `issues`, `projects`, `goals` | `issue_comments`, `issue_documents`, `document_revisions`, `issue_attachments`, `issue_work_products`, `issue_relations`, `issue_thread_interactions`, `issue_tree_holds`, `issue_labels`, `labels`, `issue_read_states`, `issue_inbox_archives`, `inbox_dismissals`, `project_workspaces`, `project_goals`, `routines`, `workspace_runtime_services`, `execution_workspaces`, `workspace_operations` |
 | **Governance** | `approvals`, `approval_comments`, `activity_log` | `principal_permission_grants`, `issue_approvals`, `issue_execution_decisions` |

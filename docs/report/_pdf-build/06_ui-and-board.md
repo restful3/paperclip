@@ -14,7 +14,7 @@ shadcn/ui 의 **공식 dashboard-01 블록** 은 이 톤의 표준 모범이다 
 
 **그림 6-1. shadcn/ui 공식 dashboard-01 블록 (출처: ui.shadcn.com)**
 
-![](figs/external/shadcn/dashboard-light.png)
+![](assets/external/shadcn/dashboard-light.png)
 
 ## 2. 70+ 페이지의 라우팅 표
 
@@ -41,10 +41,24 @@ shadcn/ui 의 **공식 dashboard-01 블록** 은 이 톤의 표준 모범이다 
 | 라우틴 | `/routines`, `/routines/:routineId` | `Routines.tsx`, `RoutineDetail.tsx` | cron-style 정기 작업 |
 | 검색·디자인 | `/search`, `/design-guide` | `Search.tsx`, `DesignGuide.tsx` | 글로벌 검색 + 컴포넌트 쇼룸 |
 | 사용자·인증 | `/u/:userSlug`, `/auth`, `/cli-auth/:id`, `/board-claim/:token`, `/invite/:token` | `UserProfile.tsx` 외 | 프로필 + 로그인 + CLI/보드/초대 인증 (보드 외부 라우트 일부 포함) |
+| Cloud upstream (#6548, 신규) | `/company/settings/cloud-upstream`, `/ux-lab/cloud-upstream` | `CloudUpstream.tsx` (646 LOC), `CloudUpstreamUxLab.tsx` (822 LOC) | 로컬 인스턴스 → cloud upstream 회사 push 동기화 + UX lab 변형 |
 
 표 1 의 도메인 중 *3개* (이슈·org·승인) 가 보드 UI 의 일상적 표면이고, 나머지는 *간헐적 표면* 이다. 페이지 컴포넌트의 LOC 도 그 일상도와 대체로 정비례한다 — `AgentDetail.tsx`, `IssueDetail.tsx`, `Inbox.tsx`, `Secrets.tsx`(2,155 LOC, secrets/vault 화면이 크게 비대해진 사례) 가 가장 무거운 페이지군이다. 거의 모든 페이지가 `react-router-dom` 의 `<Outlet>` 위에 컴포지션되며, 회사 선택은 라우트 컨텍스트로 전역 주입된다.
 
 이 라우팅 표를 제품 흐름으로 다시 읽으면 Paperclip UI의 중심은 "설정 화면이 많은 관리 콘솔"이 아니라 **운영자가 오늘 개입해야 하는 지점을 좁혀 주는 보드**다. `/dashboard/live`는 지금 움직이는 run과 활동 로그를 보여 주고, `/approvals`는 사람의 판단이 멈춰 있는 큐를 모으며, `/issues/:id`와 `/agents/:id`는 각각 작업 단위와 행위자 단위의 원인 추적 화면이다. 따라서 좋은 Paperclip UI는 페이지 수가 많다는 사실보다, 이 세 표면 사이를 얼마나 적은 클릭으로 오가게 하느냐가 중요하다. 예를 들어 cost spike가 발생했을 때 운영자가 따라야 하는 경로는 `Costs` → 관련 agent/issue → run transcript → pause/approval 결정으로 이어져야 한다. 이 연결이 끊기면 control plane은 "보고는 많은데 결정을 못 내리는" 대시보드가 된다.
+
+### 2.1 최근 추가된 UI 면 — 2026-05 사이클(#6070\~#6560)
+
+직전 16커밋 사이클(2026-05-16) 이후 37커밋이 들어오면서 UI 표면이 다섯 축에서 동시에 확장됐다.
+
+- **i18n locale catalog (#6070, #6058)** — `ui/src/i18n/locales/` 에 **39개 언어 JSON** 이 들어왔다(ar/bn/cs/da/de/el/es/fa/fi/fil/fr/he/hi/hu/id/it/ja/ko/mr/ms/nb/nl/pa/pl/pt-BR/pt-PT/ro/ru/sv/sw/ta/te/th/tr/uk/ur/vi/zh-CN/zh-TW). 직전 사이클의 *minimal i18next foundation* 단계에서 *프로덕션 locale catalog* 단계로 넘어왔다. 본문 키 자체는 아직 minimal이지만, 보드 운영자가 자기 locale 을 선택할 수 있는 토대가 만들어졌다.
+- **모바일 보드 흐름 폴리시(#6550)** — `Layout.tsx`, `MarkdownBody.tsx`(wrap test 100 LOC), `NewIssueDialog.tsx`, `CompanySettingsNav.tsx`, `ui/index.css`, PWA `site.webmanifest` 등 다수 컴포넌트가 모바일 viewport 흐름과 PWA 설치 모드(`lib/pwa-install-mode.ts`) 를 보강했다. README 가 약속한 "Mobile Ready" 슬로건의 *일부* 가 데스크톱 외 표면으로 실제 확장된 사례.
+- **secret/vault UX 통합(#6339, #6381)** — `JsonSchemaForm.tsx` 가 `SecretBindingPicker` 를 인라인 secret-ref 필드와 결합하고, `Secrets.tsx` (2,155 LOC) 에 AWS Secrets Manager provider vault UX 가 들어왔다(`aws-discovery-candidates`, `provider-vaults-tab`, `remove-provider-vault-confirmation` 스크린샷). 보드는 이제 단일 secret 입력 화면에서 외부 vault 와 로컬 secret 을 같은 picker 로 다룬다.
+- **dev/ops surfaces(#6384)** — `DevRestartBanner.tsx`(데스크톱·모바일 두 변형, 113 LOC test) 가 개발 인스턴스 재시작 신호를 보드 상단에 띄우고, `MarkdownEditor.tsx`/`Sidebar.tsx`/`SidebarProjects.tsx`/`Inbox.tsx` 가 함께 폴리시됐다. `ui/storybook/stories/dev-ops-surfaces.stories.tsx` 가 새로 추가되어 dev/ops 표면이 storybook 상에서 회귀 추적된다.
+- **inbox/instance/invite 단순화(#6269, #6341, #6433)** — inbox 행에서 planning 배지 제거(#6269), Instance Settings 사이드바에서 sandbox-provider 플러그인 숨김(#6341), 초대 페이지 query-key 충돌로 인한 white screen 수정(#6433).
+- **workspace diff viewer 플러그인 UI(#6071, #6383)** — 신규 플러그인 `packages/plugins/plugin-workspace-diff/src/ui/index.tsx` (854 LOC) 가 워크스페이스 diff 를 보드 안에서 시각화하고, `MissingPluginTabPlaceholder.tsx`, `ExecutionWorkspaceDetail.tsx`, `ProjectWorkspaceDetail.tsx` 가 플러그인 슬롯과 통합된다.
+
+이 6축 확장은 보드 UI 의 *지배 경로*(이슈·org·승인) 를 늘리지는 않았다 — 그 옆의 *인스턴스/회사 설정 표면*, *보드 외부 인증 흐름*, *플러그인 슬롯*, *모바일·i18n* 같은 *세컨더리 표면*이 동시에 두꺼워졌다. 즉 이번 사이클의 UI 변화는 "보드를 더 깊게" 가 아니라 "보드 주변을 더 평평하게" 만드는 방향이다.
 
 ## 3. 디렉터리 구조
 
