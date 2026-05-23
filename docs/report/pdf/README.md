@@ -10,7 +10,7 @@
   - **PDF outline (북마크)** — 헤딩(h1\~h6) 기반 자동 생성. PDF 뷰어 북마크 패널에서 챕터/절 단위 점프 가능
   - **그림·표 통일 캡션** — 모든 그림/표 위에 `**그림 N. 〈제목〉**` / `**표 N. 〈제목〉**` 형식의 본문 라벨
 - `paperclip-learning-report.html` — 같은 본문의 HTML 미리보기
-- `paperclip-learning-report.slides.pdf` (\~1.1 MB, 41 페이지) — 발표용 슬라이드 PDF (**slide 포맷** — 가로 16:9)
+- `paperclip-learning-report.slides.pdf` (\~2.7 MB, 98 페이지) — 발표용 슬라이드 PDF (**slide 포맷** — 가로 16:9, H2 절 단위 분할)
 - `paperclip-learning-report.slides.html` — 같은 본문의 슬라이드 HTML 미리보기
 - `figs/` — PDF/HTML 이 참조하는 SVG/이미지 자산 (28개)
 
@@ -34,10 +34,12 @@ uv run python build.py \
     /home/restful3/workspace/paperclip/docs/report/_pdf-build \
     --theme research --brand ai-odyssey --pdf
 
-# (2) slide 포맷 — 가로 16:9 발표용 (선택)
+# (2) slide 포맷 — 가로 16:9 발표용 (절 단위 분할)
+# --split h2 옵션은 ## 헤딩마다 새 슬라이드를 시작 — 한 슬라이드가 한 절을 담는다.
+# 기본값 --split h1 은 챕터당 1슬라이드라 본문이 footer 너머로 잘리니 학습 리포트는 h2 권장.
 uv run python build.py \
     /home/restful3/workspace/paperclip/docs/report/_pdf-build \
-    --theme research --brand ai-odyssey --format slide --pdf
+    --theme research --brand ai-odyssey --format slide --split h2 --pdf
 
 # 산출물 → /home/restful3/workspace/slideflow/dist/report/
 #   · _pdf-build--research--ai-odyssey.{html,pdf}            (report)

@@ -205,7 +205,7 @@
 
 - `_pdf-build/` 챕터 사본 4개 추가 동기화(02·05·06·07).
 - **report 포맷** 재빌드: 72 페이지 / 3.96 MB.
-- **slide 포맷** 신규 빌드: 41 페이지 / 1.10 MB — `paperclip-learning-report.slides.{html,pdf}` 로 산출.
+- **slide 포맷** 신규 빌드: 98 페이지 / 2.7 MB — `paperclip-learning-report.slides.{html,pdf}` 로 산출. 분할 단위는 `--split h2` (절 단위 — `## N. ...` 헤딩마다 새 슬라이드). slideflow `build.py` 의 `split_slides` 함수에 두 가지 개선이 들어갔다: ① fenced code block(```` ``` ````/`~~~`) 내부의 `# `/`## ` 주석 라인을 분할 마커로 인식하지 않음(학습 리포트 본문의 bash 주석 충돌 해소) ② `--split=h1|h2` CLI 옵션 추가(기본 h1, 학습 리포트는 절 단위 분할이 footer 잘림을 대폭 완화하므로 h2 사용). slideflow 변경은 `/home/restful3/workspace/slideflow/build.py` 별도 리포에 가해졌으며 paperclip 리포에는 영향 없음. 잔존 한계: 본문이 5\~6 단락 + 표 + 인용을 모두 포함한 일부 긴 절(예: 00 §3 큰 그림, 00 §5 V1 범위)은 여전히 마지막 1\~2행이 footer와 겹침 — 압축 manuscript 신규 작성 없이는 추가 개선 어려움.
 - 표지 KPI Pages 75 → 69 → **72** (GAP 반영 후), date `2026-05-23` 유지.
 - `docs/report/pdf/README.md` 갱신: slide 빌드 한 줄 명령 + 산출물 4종 매핑(report·slide × html·pdf).
 
