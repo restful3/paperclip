@@ -36,7 +36,7 @@ Paperclip은 **pnpm workspace** 모노레포다. 루트의 `pnpm-workspace.yaml`
 
 ## 3. built-in 어댑터 타입과 패키지형 어댑터
 
-현재 upstream `master` 의 built-in adapter type은 12개다(`server/src/adapters/registry.ts:480-493`). 패키지형 9종 — `acpx-local`, `claude-local`, `codex-local`, `cursor-cloud`, `cursor-local`, `gemini-local`, `opencode-local`, `pi-local`, `openclaw-gateway` — 은 `packages/adapters/` 아래의 워크스페이스 패키지(`server/package.json:47-55`)로 들어 있고, `hermes_local` 은 `hermes-paperclip-adapter` npm 의존성을 `server/src/adapters/registry.ts:117-127` 에서 정적으로 등록한다. 나머지 `process` 와 `http` 는 새 런타임을 임시로 붙일 때 쓰는 범용 generic 통로다. 아래 코드 1은 패키지형 어댑터 디렉터리의 표준 트리다.
+현재 upstream `master` 의 built-in adapter type은 13개다(`server/src/adapters/registry.ts:511-524`). 패키지형 10종 — `acpx-local`, `claude-local`, `codex-local`, `cursor-cloud`, `cursor-local`, `gemini-local`, `grok-local`, `opencode-local`, `pi-local`, `openclaw-gateway` — 은 `packages/adapters/` 아래의 워크스페이스 패키지(`server/package.json:47-55`)로 들어 있고, `hermes_local` 은 `hermes-paperclip-adapter` npm 의존성을 `server/src/adapters/registry.ts:128-138` 에서 정적으로 등록한다. 나머지 `process` 와 `http` 는 새 런타임을 임시로 붙일 때 쓰는 범용 generic 통로다. 아래 코드 1은 패키지형 어댑터 디렉터리의 표준 트리다.
 
 **코드 1. 어댑터 패키지의 표준 디렉터리 구조**
 

@@ -12,7 +12,7 @@ topic: Paperclip 데이터 모델 (02)
 
 **그림 4. 핵심 ER 다이어그램 — issues를 중심으로 한 12개 이상 테이블**
 
-![](figs/fig-04-er-core.svg)
+![](assets/fig-04-er-core.svg)
 
 가운데 빨간 박스가 **`issues`** — 단일 작업 단위(unit of work)다. 위쪽 회색 박스 4개(`agents` · `goals` · `projects` · `approvals`)는 모두 `companies`에서 내려온다. 아래쪽 청색 박스 그룹(`cost_events` · `budget_policies` · `budget_incidents` · `activity_log`)은 비용·거버넌스 레이어다. 이 그림은 **모든 비즈니스 데이터가 `company_id`로 스코프** 되며, 이슈 한 개가 어떻게 cost·activity·heartbeat와 연결되는지를 보여 준다. 핵심 관찰점은 세 가지다. 첫째, `issues` 박스 안의 `assignee_agent_id XOR assignee_user_id` 한 줄은 한 이슈를 *오직 한 명의* 에이전트 또는 사람이 책임지는 단일 assignee 규칙(§4)의 시각적 증거다. 둘째, `issues`는 `checkout_run_id` 와 `execution_run_id` 두 컬럼으로 `heartbeat_runs.id` 를 *직접* 참조하고(`packages/db/src/schema/issues.ts:37-38`), `activity_log.run_id` 는 실행 중 발생한 감사 이벤트를 같은 run 축으로 묶는 보조 다리다. 셋째, `cost_events` 는 `agent_id` 가 필수이고(`packages/db/src/schema/cost_events.ts:13-18`), `issue_id` · `project_id` · `goal_id` · `heartbeat_run_id` 네 개 외래키만 nullable이라 동일 비용 사건을 *다중 축으로 선택적* 으로 귀속시킨다.
 
@@ -49,7 +49,7 @@ topic: Paperclip 데이터 모델 (02)
 **코드 1. atomic checkout의 의사코드 — 다중 조건 UPDATE 한 번**
 
 ```sql
--- 의사코드 (실제 코드는 server/src/services/issues.ts:4588-4731)
+-- 의사코드 (실제 코드는 server/src/services/issues.ts:4659-4809)
 UPDATE issues
    SET assignee_agent_id   = $agentId,
        checkout_run_id     = $rid,
@@ -109,7 +109,7 @@ pnpm db:migrate
 
 **그림 5. Drizzle Studio (출처: [orm.drizzle.team/drizzle-studio/overview](https://orm.drizzle.team/drizzle-studio/overview))**
 
-![](figs/external/drizzle/drizzle-studio.webp)
+![](assets/external/drizzle/drizzle-studio.webp)
 
 ## 8. 임베디드 PostgreSQL — 무설정 dev
 
@@ -119,7 +119,7 @@ pnpm db:migrate
 
 **그림 6. PGlite — WASM PostgreSQL (출처: [github.com/electric-sql/pglite](https://github.com/electric-sql/pglite))**
 
-![](figs/external/pglite/screenshot.png)
+![](assets/external/pglite/screenshot.png)
 
 운영 환경 전환은 `DATABASE_URL` 환경 변수 하나로 끝난다. **코드 3** 은 자주 쓰는 두 가지 외부 PostgreSQL 연결 — 로컬 Docker, Supabase pooler — 의 URL 형태를 보여 준다. 같은 코드/스키마/마이그레이션이 양쪽 모두에서 그대로 동작한다.
 

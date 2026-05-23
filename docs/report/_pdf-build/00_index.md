@@ -7,7 +7,7 @@ eyebrow: Independent Research Report · 독립 리서치
 title: Paperclip 학습용 분석 리포트
 subtitle: 오픈소스 자율 에이전트 control plane 의 11챕터 가이드
 author: Claude Opus 4.7 (1M context)
-date: 2026-05-16
+date: 2026-05-23
 version: Phase G+
 publisher: AI Odyssey · Independent Research
 period: "Phase A → G+"
@@ -18,7 +18,7 @@ kpi_stats:
   - { value: "11", label: "Chapters" }
   - { value: "27", label: "Figures" }
   - { value: "21", label: "Tables" }
-  - { value: "75", label: "Pages" }
+  - { value: "69", label: "Pages" }
 toc_pills:
   - { num: "00", title: "Overview" }
   - { num: "01", title: "Architecture" }

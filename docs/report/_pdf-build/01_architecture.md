@@ -12,7 +12,7 @@ Paperclip은 **pnpm workspace** 모노레포다. 루트의 `pnpm-workspace.yaml`
 
 **그림 1-1. pnpm 모노레포 패키지 지도와 의존 방향**
 
-![](figs/fig-02-monorepo.svg)
+![](assets/fig-02-monorepo.svg)
 
 그림 1-1의 구조는 세 계층으로 나뉜다. (1) 최상위 **애플리케이션** — `server/`, `ui/`, `cli/`. (2) **공유 코어** — `packages/db`, `packages/shared`, `packages/mcp-server`. (3) **확장점** — `packages/adapters/*`, `packages/adapter-utils`, `packages/plugins`. 외부에는 사용자가 설치하는 **어댑터 플러그인**이 점선으로 그려져 있는데, 이는 코어를 수정하지 않고 새로운 에이전트 런타임을 끼워 넣는 통로다. 의존이 *위에서 아래로만* 흐른다는 점도 그림에서 확인할 수 있다 — `packages/shared`가 `server/`를 import 하지 않듯, 하위 패키지는 상위 패키지를 참조하지 않으므로 모노레포 빌드를 위상 정렬할 수 있고, 하위에서 발생한 타입 변경이 상위로 전파된다.
 
@@ -36,7 +36,7 @@ Paperclip은 **pnpm workspace** 모노레포다. 루트의 `pnpm-workspace.yaml`
 
 ## 3. built-in 어댑터 타입과 패키지형 어댑터
 
-현재 upstream `master` 의 built-in adapter type은 12개다(`server/src/adapters/registry.ts:480-493`). 패키지형 9종 — `acpx-local`, `claude-local`, `codex-local`, `cursor-cloud`, `cursor-local`, `gemini-local`, `opencode-local`, `pi-local`, `openclaw-gateway` — 은 `packages/adapters/` 아래의 워크스페이스 패키지(`server/package.json:47-55`)로 들어 있고, `hermes_local` 은 `hermes-paperclip-adapter` npm 의존성을 `server/src/adapters/registry.ts:117-127` 에서 정적으로 등록한다. 나머지 `process` 와 `http` 는 새 런타임을 임시로 붙일 때 쓰는 범용 generic 통로다. 아래 코드 1은 패키지형 어댑터 디렉터리의 표준 트리다.
+현재 upstream `master` 의 built-in adapter type은 13개다(`server/src/adapters/registry.ts:511-524`). 패키지형 10종 — `acpx-local`, `claude-local`, `codex-local`, `cursor-cloud`, `cursor-local`, `gemini-local`, `grok-local`, `opencode-local`, `pi-local`, `openclaw-gateway` — 은 `packages/adapters/` 아래의 워크스페이스 패키지(`server/package.json:47-55`)로 들어 있고, `hermes_local` 은 `hermes-paperclip-adapter` npm 의존성을 `server/src/adapters/registry.ts:128-138` 에서 정적으로 등록한다. 나머지 `process` 와 `http` 는 새 런타임을 임시로 붙일 때 쓰는 범용 generic 통로다. 아래 코드 1은 패키지형 어댑터 디렉터리의 표준 트리다.
 
 **코드 1. 어댑터 패키지의 표준 디렉터리 구조**
 

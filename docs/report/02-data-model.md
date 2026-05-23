@@ -49,7 +49,7 @@ topic: Paperclip 데이터 모델 (02)
 **코드 1. atomic checkout의 의사코드 — 다중 조건 UPDATE 한 번**
 
 ```sql
--- 의사코드 (실제 코드는 server/src/services/issues.ts:4588-4731)
+-- 의사코드 (실제 코드는 server/src/services/issues.ts:4659-4809)
 UPDATE issues
    SET assignee_agent_id   = $agentId,
        checkout_run_id     = $rid,

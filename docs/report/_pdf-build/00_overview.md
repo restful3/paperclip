@@ -27,11 +27,11 @@ Paperclip의 제안은 위 문제를 **작업 관리자 형태의 control plane*
 
 ## 3. 큰 그림
 
-**그림 1. Paperclip의 3-zone 큰 그림** 은 시스템이 항상 세 영역으로 분리되어 있음을 보여 준다. 왼쪽은 **인간 보드(Board)** 영역으로, 운영자는 React 보드 UI · CLI · 모바일 웹을 통해 들어온다. 가운데가 Paperclip 본체 — REST API, 오케스트레이션 서비스, Drizzle로 관리되는 PostgreSQL, MCP 서버, 플러그인 런타임이 모인 **control plane**이다. 오른쪽은 **execution plane**으로, 현재 upstream `master` 기준 12개의 built-in adapter type(`server/src/adapters/registry.ts:480-493`)이 외부 에이전트 런타임을 호출한다. 10개는 구체 런타임(Claude Code, Codex, Cursor local, Cursor Cloud, Gemini, OpenCode, Pi, ACP-x, OpenClaw 게이트웨이, Hermes)을 향하고, 2개는 범용 `process`/`http` 백업 통로다. Paperclip은 *에이전트 런타임 로직*을 내장하지 않는다 — heartbeat를 보내 child process 또는 webhook으로 외부 런타임을 깨우고, 결과를 거두어 비용·상태를 추적한다.
+**그림 1. Paperclip의 3-zone 큰 그림** 은 시스템이 항상 세 영역으로 분리되어 있음을 보여 준다. 왼쪽은 **인간 보드(Board)** 영역으로, 운영자는 React 보드 UI · CLI · 모바일 웹을 통해 들어온다. 가운데가 Paperclip 본체 — REST API, 오케스트레이션 서비스, Drizzle로 관리되는 PostgreSQL, MCP 서버, 플러그인 런타임이 모인 **control plane**이다. 오른쪽은 **execution plane**으로, 현재 upstream `master` 기준 13개의 built-in adapter type(`server/src/adapters/registry.ts:511-524`)이 외부 에이전트 런타임을 호출한다. 11개는 구체 런타임(Claude Code, Codex, Cursor local, Cursor Cloud, Gemini, Grok local, OpenCode, Pi, ACP-x, OpenClaw 게이트웨이, Hermes)을 향하고, 2개는 범용 `process`/`http` 백업 통로다. Paperclip은 *에이전트 런타임 로직*을 내장하지 않는다 — heartbeat를 보내 child process 또는 webhook으로 외부 런타임을 깨우고, 결과를 거두어 비용·상태를 추적한다.
 
 **그림 1. Paperclip의 3-zone 큰 그림 — Board · Control plane · Execution plane**
 
-![](figs/fig-01-bigpicture.svg)
+![](assets/fig-01-bigpicture.svg)
 
 그림의 핵심은 **세 영역 사이의 화살표 방향**이다. 보드 → control plane은 *인증된 REST 요청* 한 가지로 단순화되어 있고, control plane → execution plane은 *어댑터 계약(execute / testEnvironment / …)*으로 추상화되어 있다. 즉 좌우 두 경계가 모두 *얇은 인터페이스*라서, 새로운 UI(모바일·CLI·MCP 클라이언트)와 새로운 런타임(외부 어댑터 플러그인)이 코어를 바꾸지 않고 들어올 수 있다. control plane 박스 안의 5개 서브시스템 — REST API · 서비스 · DB · MCP 서버 · 플러그인 런타임 — 은 [05-server-api.md](05-server-api.md)에서 토폴로지로 다시 분해된다.
 
@@ -41,7 +41,7 @@ Paperclip의 제안은 위 문제를 **작업 관리자 형태의 control plane*
 
 **그림 2. Orchestrator-workers 패턴 (출처: Anthropic — Building Effective Agents)**
 
-![](figs/external/building-effective-agents/orchestrator-workers.png)
+![](assets/external/building-effective-agents/orchestrator-workers.png)
 
 ## 4. 5개 핵심 원칙
 

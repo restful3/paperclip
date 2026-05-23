@@ -62,7 +62,7 @@ approvals {
 
 표 1의 7가지 권한은 *영향 반경*으로 정렬되어 있다 — 위에서 아래로 갈수록 단일 에이전트 → 회사 → 이슈/트리 → 단건 → 예산 → 결정 → 문서 단위로 좁혀진다. 보드는 평소 *결정 override*만 봐도 되지만, 위에서 아래까지 모든 행이 *항상 가용*하다는 점이 거버넌스의 안전망이다. graceful cancel의 동작은 §4-pause-behavior가 정의한다 — *(1) signal current run, (2) grace period, (3) force-kill on timeout, (4) stop future heartbeats.*
 
-표 1 의 마지막 행 **문서 락/언락(document lock)** 은 다른 권한과 결이 다르다 — 실행을 *멈추는* 것이 아니라 산출물을 *동결* 한다. issue document(이슈에 누적되는 plan·handoff 등 작업 산출물)는 에이전트가 같은 키로 계속 개정하므로, 보드가 승인한 스냅샷이 이후 쓰기로 덮일 위험이 있다. 락이 걸린 문서는 불변이 되어 보드 본인의 수정·삭제·복원조차 언락 전에는 `409` 로 거부된다. 락/언락 라우트는 board 인증 전용이라 비-board 행위자는 `403` 을 받는다. 에이전트가 잠긴 키에 쓰면 덮어쓰기 대신 `plan-2` 같은 **파생 키(derived key)** 로 새 문서를 만든다 — 에이전트 작업은 막히지 않되 승인본은 보존된다. 락 상태는 `documents` 테이블의 `locked_at` · `locked_by_agent_id` · `locked_by_user_id` 세 컬럼(마이그레이션 `0085`)에 들고, 락/언락은 `activity_log` 에 `issue.document_locked` · `issue.document_unlocked` 로 감사 흔적을 남긴다(`server/src/routes/issues.ts:2093·2141`).
+표 1 의 마지막 행 **문서 락/언락(document lock)** 은 다른 권한과 결이 다르다 — 실행을 *멈추는* 것이 아니라 산출물을 *동결* 한다. issue document(이슈에 누적되는 plan·handoff 등 작업 산출물)는 에이전트가 같은 키로 계속 개정하므로, 보드가 승인한 스냅샷이 이후 쓰기로 덮일 위험이 있다. 락이 걸린 문서는 불변이 되어 보드 본인의 수정·삭제·복원조차 언락 전에는 `409` 로 거부된다. 락/언락 라우트는 board 인증 전용이라 비-board 행위자는 `403` 을 받는다. 에이전트가 잠긴 키에 쓰면 덮어쓰기 대신 `plan-2` 같은 **파생 키(derived key)** 로 새 문서를 만든다 — 에이전트 작업은 막히지 않되 승인본은 보존된다. 락 상태는 `documents` 테이블의 `locked_at` · `locked_by_agent_id` · `locked_by_user_id` 세 컬럼(마이그레이션 `0085`)에 들고, 락/언락은 `activity_log` 에 `issue.document_locked` · `issue.document_unlocked` 로 감사 흔적을 남긴다(`server/src/routes/issues.ts:2548·2596`).
 
 ## 4. 예산 — 회사가 통제할 수 있는 가장 큰 변수
 

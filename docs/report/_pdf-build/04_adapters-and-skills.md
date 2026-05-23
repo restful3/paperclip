@@ -10,13 +10,13 @@ topic: Paperclip 어댑터·스킬 시스템 (04)
 
 Paperclip README의 슬로건 — *"If it can receive a heartbeat, it's hired."* — 은 어댑터 시스템의 핵심 약속이다. 어댑터는 Paperclip control plane과 외부 에이전트 런타임 사이의 좁은 통로다.
 
-그림 7 이 런타임 전용 built-in 어댑터 10개와 범용 어댑터 2개(`process` · `http`)를 능력 축으로 정렬한다(`server/src/adapters/registry.ts:480-493`). 각 축은 `ServerAdapterModule`(`packages/adapter-utils/src/types.ts:349-431`)의 실제 필드 — 핵심 실행·모델·옵션 필드(`execute`, `testEnvironment`, `listSkills`/`syncSkills`, `sessionCodec`, `supportsLocalAgentJwt`, `getQuotaWindows`, `detectModel`, `getConfigSchema` 등은 `:349-396`)와 capability flags(`supportsInstructionsBundle`, `instructionsPathKey`, `requiresMaterializedRuntimeSkills`, `getRuntimeCommandSpec` 등은 `:407-431`) — 에 대응한다.
+그림 7 이 런타임 전용 built-in 어댑터 11개와 범용 어댑터 2개(`process` · `http`)를 능력 축으로 정렬한다(`server/src/adapters/registry.ts:511-524`). 각 축은 `ServerAdapterModule`(`packages/adapter-utils/src/types.ts:349-431`)의 실제 필드 — 핵심 실행·모델·옵션 필드(`execute`, `testEnvironment`, `listSkills`/`syncSkills`, `sessionCodec`, `supportsLocalAgentJwt`, `getQuotaWindows`, `detectModel`, `getConfigSchema` 등은 `:349-396`)와 capability flags(`supportsInstructionsBundle`, `instructionsPathKey`, `requiresMaterializedRuntimeSkills`, `getRuntimeCommandSpec` 등은 `:407-431`) — 에 대응한다.
 
-**그림 7. 어댑터 능력 매트릭스 — 런타임 전용 built-in 10개 + 범용 process/http × ServerAdapterModule 필드**
+**그림 7. 어댑터 능력 매트릭스 — 런타임 전용 built-in 11개 + 범용 process/http × ServerAdapterModule 필드**
 
-![](figs/fig-07-adapter-matrix.svg)
+![](assets/fig-07-adapter-matrix.svg)
 
-전반적으로 주요 local coding adapters(`claude-local`, `codex-local`, `cursor-local`, `gemini-local`, `opencode-local`, `pi-local`)는 `execute` + `testEnvironment` 외에 `listSkills`/`syncSkills`, `sessionCodec`, `models`/`listModels`, `agentConfigurationDoc` 같은 핵심 선택 필드를 대체로 제공한다. 다만 모든 선택 필드를 일률적으로 채우지는 않는다 — `getQuotaWindows`는 현재 `claude-local`과 `codex-local`만 제공하고, `getConfigSchema`는 `acpx-local`과 `cursor-cloud`가 제공하며, `detectModel`은 현재 upstream `master`에서는 정적으로 등록된 `hermes-paperclip-adapter` 경로에서 들어온다(`server/src/adapters/registry.ts:116-123, 456-465`). `openclaw-gateway`는 HTTP 브리지라 일부 lifecycle이 제한적이고, 회색 점선의 generic `process · http`는 최소 계약 — `execute` + `testEnvironment` — 만 채운 백업 통로다. 다이어그램의 `status`/`cancel`/`MCP` 라벨은 **adapter module의 추상 능력 축**이며, 런타임 차원의 정확한 시그널 매핑은 어댑터 코드에 따라 다르다는 점을 legend에서 명시한다. 그림 7은 행 기준으로 *어댑터별 능력 프로파일*, 열 기준으로 *능력별 채택률*을 보여 준다. 행이 빈 칸이 많은 어댑터는 *생태계 미성숙*의 신호이고, 열이 빈 칸이 많은 능력은 *Paperclip 코어가 아직 강제하지 않는다*는 신호다. 새 어댑터 플러그인은 그림 7의 첫 두 열(`execute` · `testEnvironment`)만 채워도 시스템에 들어올 수 있으며, 나머지 능력은 점진적으로 추가할 수 있다.
+전반적으로 주요 local coding adapters(`claude-local`, `codex-local`, `cursor-local`, `gemini-local`, `opencode-local`, `pi-local`)는 `execute` + `testEnvironment` 외에 `listSkills`/`syncSkills`, `sessionCodec`, `models`/`listModels`, `agentConfigurationDoc` 같은 핵심 선택 필드를 대체로 제공한다. 다만 모든 선택 필드를 일률적으로 채우지는 않는다 — `getQuotaWindows`는 현재 `claude-local`과 `codex-local`만 제공하고, `getConfigSchema`는 `acpx-local`과 `cursor-cloud`가 제공하며, `detectModel`은 현재 upstream `master`에서는 정적으로 등록된 `hermes-paperclip-adapter` 경로에서 들어온다(`server/src/adapters/registry.ts:128-138, 488`). `openclaw-gateway`는 HTTP 브리지라 일부 lifecycle이 제한적이고, 회색 점선의 generic `process · http`는 최소 계약 — `execute` + `testEnvironment` — 만 채운 백업 통로다. 다이어그램의 `status`/`cancel`/`MCP` 라벨은 **adapter module의 추상 능력 축**이며, 런타임 차원의 정확한 시그널 매핑은 어댑터 코드에 따라 다르다는 점을 legend에서 명시한다. 그림 7은 행 기준으로 *어댑터별 능력 프로파일*, 열 기준으로 *능력별 채택률*을 보여 준다. 행이 빈 칸이 많은 어댑터는 *생태계 미성숙*의 신호이고, 열이 빈 칸이 많은 능력은 *Paperclip 코어가 아직 강제하지 않는다*는 신호다. 새 어댑터 플러그인은 그림 7의 첫 두 열(`execute` · `testEnvironment`)만 채워도 시스템에 들어올 수 있으며, 나머지 능력은 점진적으로 추가할 수 있다.
 
 ## 2. built-in 어댑터 요약
 
@@ -45,19 +45,19 @@ Paperclip README의 슬로건 — *"If it can receive a heartbeat, it's hired."*
 
 **그림 4-1. OpenAI Codex CLI 스플래시 (출처: github.com/openai/codex)**
 
-![](figs/external/codex/codex-cli-splash.png)
+![](assets/external/codex/codex-cli-splash.png)
 
 **그림 4-2. Google Gemini CLI 동작 화면 (출처: github.com/google-gemini/gemini-cli)**
 
-![](figs/external/gemini-cli/gemini-cli-screenshot.png)
+![](assets/external/gemini-cli/gemini-cli-screenshot.png)
 
 **그림 4-3. sst/opencode TUI (출처: github.com/sst/opencode)**
 
-![](figs/external/opencode/screenshot.png)
+![](assets/external/opencode/screenshot.png)
 
 **그림 4-4. Pi coding agent 트리 뷰 (출처: github.com/badlogic/pi-mono)**
 
-![](figs/external/pi/tree-view.png)
+![](assets/external/pi/tree-view.png)
 
 ## 3. 어댑터 폴더의 4개 진입점
 
@@ -104,7 +104,7 @@ pnpm paperclipai plugin install <package-or-path>
 # 4) 새 에이전트 만들 때 adapter_type=<plugin-id>
 ```
 
-> **외부화 상태.** 현재 upstream `master`의 `server/src/adapters/registry.ts:106\~117`은 **`hermes-paperclip-adapter`를 정적 import**하고, 같은 파일의 built-in 등록 배열에 `hermesLocalAdapter`를 포함한다. 즉 메인 라인은 아직 Hermes를 코어 의존성으로 포함한다. 반면 HenkDz 포크의 `feat/externalize-hermes-adapter` 브랜치는 *"코어에는 hermes 의존성도 등록도 두지 않고, 플러그인으로만 도입"* 하는 외부화 사례다. 이 차이를 분리해서 읽어야 adapter plugin 설계가 어디까지 구현됐고, 어디부터 브랜치별 정책인지 혼동하지 않는다.
+> **외부화 상태.** 현재 upstream `master`의 `server/src/adapters/registry.ts:128\~138`은 **`hermes-paperclip-adapter`를 정적 import**하고, 같은 파일의 built-in 등록 배열에 `hermesLocalAdapter`를 포함한다. 즉 메인 라인은 아직 Hermes를 코어 의존성으로 포함한다. 반면 HenkDz 포크의 `feat/externalize-hermes-adapter` 브랜치는 *"코어에는 hermes 의존성도 등록도 두지 않고, 플러그인으로만 도입"* 하는 외부화 사례다. 이 차이를 분리해서 읽어야 adapter plugin 설계가 어디까지 구현됐고, 어디부터 브랜치별 정책인지 혼동하지 않는다.
 
 ### 4.1 Sandbox provider plugins — 실행 환경 driver의 외부화
 
