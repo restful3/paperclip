@@ -18,7 +18,7 @@ kpi_stats:
   - { value: "11", label: "Chapters" }
   - { value: "28", label: "Figures" }
   - { value: "19", label: "Tables" }
-  - { value: "79", label: "Pages" }
+  - { value: "83", label: "Pages" }
 toc_pills:
   - { num: "00", title: "Overview" }
   - { num: "01", title: "Architecture" }
@@ -106,6 +106,14 @@ toc_pills:
 .body > h1:nth-of-type(9)::after   { content: "5분 시작 · CEO 첫 에이전트 · 운영 점검"; }
 .body > h1:nth-of-type(10)::after  { content: "11 강점 · 10 약점 · 7 트레이드오프"; }
 .body > h1:nth-of-type(11)::after  { content: "4-층 위계 · 외부 다이어그램 · 학습 단계"; }
+
+/* =============================================================
+   paperclip-only layout/font override (2026-05-24)
+   본문 가독성을 위해 .page 좌우/상하 padding 압축 + 본문 폰트 16→17px.
+   theme/research 의 @page margin 은 그대로 두고 .page 패딩만 줄여 본문 폭 확보.
+   ============================================================= */
+html, body { font-size: 17px; }
+.page { padding: 24px 16px 36px; }
 </style>
 
 ## 목차 — Table of Contents
