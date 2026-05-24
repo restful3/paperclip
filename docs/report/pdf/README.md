@@ -4,13 +4,13 @@
 
 ## 산출물
 
-- `paperclip-learning-report.pdf` (\~4.0 MB, 72 페이지) — 인쇄/배포용 PDF (**report 포맷** — A4 도큐먼트)
+- `paperclip-learning-report.pdf` (\~7.3 MB, 79 페이지) — 인쇄/배포용 PDF (**report 포맷** — A4 도큐먼트)
   - **풀페이지 표지** — A4 한 페이지를 가득 채우는 커버
   - **목차 페이지** — 11개 챕터 한 줄 요약 + 그림·표 인덱스 + 시각 스타일 규칙
   - **PDF outline (북마크)** — 헤딩(h1\~h6) 기반 자동 생성. PDF 뷰어 북마크 패널에서 챕터/절 단위 점프 가능
   - **그림·표 통일 캡션** — 모든 그림/표 위에 `**그림 N. 〈제목〉**` / `**표 N. 〈제목〉**` 형식의 본문 라벨
 - `paperclip-learning-report.html` — 같은 본문의 HTML 미리보기
-- `paperclip-learning-report.slides.pdf` (\~2.7 MB, 98 페이지) — 발표용 슬라이드 PDF (**slide 포맷** — 가로 16:9, H2 절 단위 분할)
+- `paperclip-learning-report.slides.pdf` (\~4.9 MB, 98 페이지) — 발표용 슬라이드 PDF (**slide 포맷** — 가로 16:9, H2 절 단위 분할)
 - `paperclip-learning-report.slides.html` — 같은 본문의 슬라이드 HTML 미리보기
 - `figs/` — PDF/HTML 이 참조하는 SVG/이미지 자산 (28개)
 

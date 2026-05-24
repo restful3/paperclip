@@ -7,7 +7,7 @@ eyebrow: Independent Research Report · 독립 리서치
 title: Paperclip 학습용 분석 리포트
 subtitle: 오픈소스 자율 에이전트 control plane 의 11챕터 가이드
 author: Claude Opus 4.7 (1M context)
-date: 2026-05-23
+date: 2026-05-24
 version: Phase G+
 publisher: AI Odyssey · Independent Research
 period: "Phase A → G+"
@@ -16,9 +16,9 @@ abstract: |
   <strong>Paperclip</strong> 은 자율 에이전트들이 모인 <em>회사</em> 를 운영하는 오픈소스 <strong>control plane</strong> 이다. 보드 운영자는 승인·예산·일시정지로 거버넌스를 행사하고, 어댑터(외부 CLI · 웹훅 · 원격 게이트웨이) 가 실제 에이전트 런타임을 맡는다. 이 리포트는 <strong>11개 챕터</strong> 로 데이터 모델·런타임·어댑터·서버·UI·거버넌스를 따라가며 큰 그림을 한 권에 잡는다.
 kpi_stats:
   - { value: "11", label: "Chapters" }
-  - { value: "27", label: "Figures" }
-  - { value: "21", label: "Tables" }
-  - { value: "72", label: "Pages" }
+  - { value: "28", label: "Figures" }
+  - { value: "19", label: "Tables" }
+  - { value: "79", label: "Pages" }
 toc_pills:
   - { num: "00", title: "Overview" }
   - { num: "01", title: "Architecture" }

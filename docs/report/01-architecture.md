@@ -22,13 +22,13 @@ Paperclip은 **pnpm workspace** 모노레포다. 루트의 `pnpm-workspace.yaml`
 
 | 패키지 | 역할 | 주요 export | 의존 |
 |---|---|---|---|
-| `server/` | Express REST API + 오케스트레이션 호스트 | `app.ts`, `routes/*`, `services/*`, `realtime/*` | db · shared · adapter-utils · plugin-sdk · 9개 adapter workspace · hermes-paperclip-adapter (npm) (`server/package.json:47-70`) |
-| `ui/` | React + Vite 보드 UI | 페이지·컴포넌트·api 클라이언트 | shared · 9개 adapter workspace · adapter-utils · hermes-paperclip-adapter (`ui/package.json:37-54`) — 어댑터 UI entry 동적 임포트용 |
-| `cli/` | `paperclipai` 단일 진입 CLI | `src/index.ts` (commands: onboard · doctor · run · plugin · db:backup) | shared · server · db · adapter-utils · 9개 adapter workspace (`cli/package.json:40-57`) — in-process boot |
-| `packages/db` | Drizzle 스키마 + 마이그레이션 | `schema/*.ts` (80+ 테이블), `client.ts` | shared · drizzle-orm · embedded-postgres · postgres (`packages/db/package.json:46-50`) |
+| `server/` | Express REST API + 오케스트레이션 호스트 | `app.ts`, `routes/*`, `services/*`, `realtime/*` | db · shared · adapter-utils · plugin-sdk · 10개 adapter workspace · hermes-paperclip-adapter (npm) (`server/package.json:47-56, 71`) |
+| `ui/` | React + Vite 보드 UI | 페이지·컴포넌트·api 클라이언트 | shared · 10개 adapter workspace · adapter-utils · hermes-paperclip-adapter (`ui/package.json:37-46, 55`) — 어댑터 UI entry 동적 임포트용 |
+| `cli/` | `paperclipai` 단일 진입 CLI | `src/index.ts` (commands: onboard · doctor · run · plugin · db:backup) | shared · server · db · adapter-utils · 10개 adapter workspace (`cli/package.json:40-49`) — in-process boot |
+| `packages/db` | Drizzle 스키마 + 마이그레이션 | `schema/*.ts` (88개 테이블), `client.ts` | shared · drizzle-orm · embedded-postgres · postgres (`packages/db/package.json:46-50`) |
 | `packages/shared` | 타입·검증·상수 | `api.ts`, `adapter-type.ts`, zod 검증 | (no internal) |
 | `packages/mcp-server` | Paperclip 공식 MCP 서버 | tools / resources | shared · `@modelcontextprotocol/sdk` (REST API 호출, DB 직접 의존 없음) (`packages/mcp-server/package.json:45-49`) |
-| `packages/adapters/*` | 패키지형 내장 어댑터 9개 | 각자 `src/index.ts`, `src/server`, `src/cli`, `src/ui` | adapter-utils |
+| `packages/adapters/*` | 패키지형 내장 어댑터 10개 | 각자 `src/index.ts`, `src/server`, `src/cli`, `src/ui` | adapter-utils |
 | `packages/adapter-utils` | 어댑터 공통 도우미 | session bridge, output 파서 | (no runtime internal) (`packages/adapter-utils/package.json:42-45`) |
 | `packages/plugins/sdk` | 플러그인 SDK | manifest, lifecycle hook, UI 브릿지 | shared (`packages/plugins/sdk/package.json:110-113`) — *플러그인 host runtime은 `server/src/services/plugin-*` 에 있고, `packages/plugins/{examples,plugin-llm-wiki,sandbox-providers/*}` 는 별도 워크스페이스* |
 
@@ -36,7 +36,7 @@ Paperclip은 **pnpm workspace** 모노레포다. 루트의 `pnpm-workspace.yaml`
 
 ## 3. built-in 어댑터 타입과 패키지형 어댑터
 
-현재 upstream `master` 의 built-in adapter type은 13개다(`server/src/adapters/registry.ts:511-524`). 패키지형 10종 — `acpx-local`, `claude-local`, `codex-local`, `cursor-cloud`, `cursor-local`, `gemini-local`, `grok-local`, `opencode-local`, `pi-local`, `openclaw-gateway` — 은 `packages/adapters/` 아래의 워크스페이스 패키지(`server/package.json:47-55`)로 들어 있고, `hermes_local` 은 `hermes-paperclip-adapter` npm 의존성을 `server/src/adapters/registry.ts:128-138` 에서 정적으로 등록한다. 나머지 `process` 와 `http` 는 새 런타임을 임시로 붙일 때 쓰는 범용 generic 통로다. 아래 코드 1은 패키지형 어댑터 디렉터리의 표준 트리다.
+현재 upstream `master` 의 built-in adapter type은 13개다(`server/src/adapters/registry.ts:513-525`). 패키지형 10종 — `acpx-local`, `claude-local`, `codex-local`, `cursor-cloud`, `cursor-local`, `gemini-local`, `grok-local`, `opencode-local`, `pi-local`, `openclaw-gateway` — 은 `packages/adapters/` 아래의 워크스페이스 패키지(`server/package.json:47-56`)로 들어 있고, `hermes_local` 은 `hermes-paperclip-adapter` 를 정적으로 import 하고(`server/src/adapters/registry.ts:128-138`), built-in 등록 배열에 포함된다(`server/src/adapters/registry.ts:523`). 나머지 `process` 와 `http` 는 새 런타임을 임시로 붙일 때 쓰는 범용 generic 통로다. 아래 코드 1은 패키지형 어댑터 디렉터리의 표준 트리다.
 
 **코드 1. 어댑터 패키지의 표준 디렉터리 구조**
 
@@ -55,7 +55,7 @@ packages/adapters/<name>/
 
 ## 4. 단일 origin dev 모드
 
-개발 단계에서는 Vite 의 **middleware mode** 가 핵심이다. `pnpm dev` 는 Express 서버를 띄우면서 동시에 `vite.middlewareMode` 로 SPA 자산을 *같은 origin* 에서 서빙한다. 기본 요청 포트는 `3100` 이며, 점유 중이면 `detect-port`(`server/package.json:64`) 가 다음 사용 가능한 포트를 골라 그쪽으로 올린다 — UI 도 선택된 API 포트에 same-origin 으로 따라간다. 이 결과 dev 모드에서는 CORS 설정이 필요 없고, 보드 UI 의 `fetch('/api/...')` 가 그대로 같은 origin 으로 떨어진다. 코드 2 가 dev 워크플로의 4가지 모드를 한 줄씩 보여 준다 — 일상은 `pnpm dev` 하나로 충분하지만, 서버/UI 를 따로 디버깅해야 할 때를 위해 분리 모드도 준비되어 있다.
+개발 단계에서는 Vite 의 **middleware mode** 가 핵심이다. `pnpm dev` 는 Express 서버를 띄우면서 동시에 `vite.middlewareMode` 로 SPA 자산을 *같은 origin* 에서 서빙한다. 기본 요청 포트는 `3100` 이며, 점유 중이면 `detect-port`(`server/package.json:65`) 가 다음 사용 가능한 포트를 골라 그쪽으로 올린다 — UI 도 선택된 API 포트에 same-origin 으로 따라간다. 이 결과 dev 모드에서는 CORS 설정이 필요 없고, 보드 UI 의 `fetch('/api/...')` 가 그대로 같은 origin 으로 떨어진다. 코드 2 가 dev 워크플로의 4가지 모드를 한 줄씩 보여 준다 — 일상은 `pnpm dev` 하나로 충분하지만, 서버/UI 를 따로 디버깅해야 할 때를 위해 분리 모드도 준비되어 있다.
 
 **코드 2. 개발 워크플로 — 4가지 dev 명령**
 
@@ -94,9 +94,9 @@ pnpm storybook         # ui/ 의 컴포넌트 카탈로그 (port 6006)
 | `pnpm paperclipai onboard` | 인터랙티브 초기 설정 |
 | `pnpm paperclipai doctor` | 환경 점검 |
 
-표 2 의 명령은 *세 단계의 신뢰성 사다리* 로 묶인다 — `dev`/`dev:once` 가 일상의 빠른 루프, `db:generate`/`db:migrate` 가 스키마 변경의 안전 게이트, `test`/`test:e2e`/`-r typecheck`/`-r build` 가 PR 전 검증 라인이다. 첫 사용자는 `paperclipai onboard` → `pnpm dev` → `pnpm test` 세 줄만으로 한 회사의 한 회차를 돌려 볼 수 있다.
+표 2 의 명령은 *세 단계의 신뢰성 사다리* 로 묶인다 — `dev`/`dev:once` 가 일상의 빠른 루프, `db:generate`/`db:migrate` 가 스키마 변경의 안전 게이트, `test`/`test:e2e`/`typecheck`/`build` 가 PR 전 검증 라인이다. 첫 사용자는 `paperclipai onboard` → `pnpm dev` → `pnpm test` 세 줄만으로 한 회사의 한 회차를 돌려 볼 수 있다.
 
-## 6. 두 종류의 인스턴스 디렉터리
+## 6. 인스턴스 디렉터리 레이아웃
 
 런타임 데이터는 **저장소 밖** 의 `~/.paperclip/instances/<instance>/` 에 산다. 코드 3 은 한 인스턴스의 **핵심 경로만** 추린 것이고, 전체 레이아웃(예: `data/backups/`, `logs/`, `workspaces/<agent-id>/`, `projects/`, `companies/<company-id>/codex-home/` 등)은 `doc/DEVELOPING.md` 의 인스턴스 섹션을 참고해야 한다. 코드 저장소와 사용자 데이터가 깨끗이 분리되어 있어, 같은 머신에서 여러 인스턴스를 병렬로 띄울 수 있다.
 
@@ -114,4 +114,4 @@ pnpm storybook         # ui/ 의 컴포넌트 카탈로그 (port 6006)
 
 이는 두 가지를 가능케 한다. (1) 코드 저장소가 사용자 데이터를 깨끗이 분리한다. (2) 한 머신에서 여러 인스턴스를 병렬로 운영할 수 있다 — `PAPERCLIP_HOME` 또는 `PAPERCLIP_INSTANCE_ID` 로 인스턴스 디렉터리를 분리하면, 포트는 detect-port 가 사용 가능한 값으로 알아서 조정한다.
 
-[02-data-model.md](02-data-model.md)는 이 패키지 구조 위의 데이터 모델 — Drizzle 스키마 80+ 테이블 — 을 핵심 ER 그림으로 분석한다.
+[02-data-model.md](02-data-model.md)는 이 패키지 구조 위의 데이터 모델 — Drizzle 스키마 88개 테이블 — 을 핵심 ER 그림으로 분석한다.

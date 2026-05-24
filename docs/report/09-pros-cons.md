@@ -26,11 +26,11 @@ topic: 강점 · 약점 · 트레이드오프 (09)
 | **명확한 책임 분리 — control plane vs execution plane** | 장기 SPEC `invoke/status/cancel`(`doc/SPEC.md:207-215`) vs 현재 구현 `execute`+`testEnvironment` 필수(`packages/adapter-utils/src/types.ts:349-352`) — 어댑터 계약이 *두 층*으로 얇게 유지된다 | 새 런타임이 등장해도(예: GPT-5 native CLI) 어댑터만 추가하면 된다. 코어가 *에이전트 자체를 흉내내지 않는다*는 점이 장기 유지 부담을 줄인다. |
 | **회사를 1급 객체로** | 80여 개 테이블 중 60여 개가 `company_id` 컬럼 보유, multi-company 격리 | 한 인스턴스로 여러 자율 사업체를 운영하는 시나리오가 자연스럽다. 데이터 격리가 강제되어 보안 회귀가 적다. |
 | **단일 assignee + atomic checkout** | `issues.checkout_run_id`를 중심으로 한 조건부 UPDATE (`server/src/services/issues.ts:4659-4809` — 의사코드는 02장 §5) | 동시성 문제를 데이터 모델 차원에서 해결. CRDT/낙관적 락 없이 다중 조건 UPDATE 한 번으로 lock + status + adopt. |
-| **보수적 회복 모델** | `doc/execution-semantics.md:407-422` §12 + `doc/SPEC-implementation.md:434-442` V1 liveness rule — *"preserve ownership / retry once / explicit recovery action / escalate visibly"* | 자동 재할당의 위험(잘못된 할당, 중복 작업)을 거부하고, 명시적인 회복 이슈로 보드/회복 오너에게 결정권을 돌린다. |
+| **보수적 회복 모델** | `doc/execution-semantics.md:405-423` §11 + `doc/SPEC-implementation.md:440-445` V1 liveness rule — *"preserve ownership / retry once / explicit recovery action / escalate visibly"* | 자동 재할당의 위험(잘못된 할당, 중복 작업)을 거부하고, 명시적인 회복 이슈로 보드/회복 오너에게 결정권을 돌린다. |
 | **Token-level 비용 회계** | `cost_events.cached_input_tokens` 별도 컬럼 + `project_id`/`heartbeat_run_id` 다축 FK · `billing_code` 자유 라벨 | 프롬프트 캐싱이 도입된 2024+ LLM 가격 모델을 정확히 반영. byProject attribution은 `coalesce(cost_events.project_id, run→activity_log→issue.project_id)` 경로로 계산되며, 회사 단위 burn rate가 신뢰할 만하다. |
-| **하드 일시정지 안전장치** | hard ceiling 정책(`doc/SPEC.md:295-300`) + `budgetService.getInvocationBlock`(`server/src/services/heartbeat.ts:8610-8618`) · `withAgentStartLock`(`server/src/services/agent-start-lock.ts:32`) · `cancelBudgetScopeWork`(`server/src/services/heartbeat.ts:9431-9456`) 세 메커니즘 조합 | 폭주 루프에 의한 토큰 사고를 차단하는 안전망. *V1의 must-have*로 우선순위가 높다. |
+| **하드 일시정지 안전장치** | hard ceiling 정책(`doc/SPEC.md:295-301`) + `budgetService.getInvocationBlock`(`server/src/services/budgets.ts:716-862`; 호출 예 `server/src/services/heartbeat.ts:3976-3982` 또는 `:8758`) · `withAgentStartLock`(`server/src/services/agent-start-lock.ts:32`) · `cancelBudgetScopeWork`(`server/src/services/heartbeat.ts:9579-9604`) 세 메커니즘 조합 | 폭주 루프에 의한 토큰 사고를 차단하는 안전망. *V1의 must-have*로 우선순위가 높다. |
 | **단일 origin dev 흐름** | Vite middlewareMode + `pnpm dev` 한 줄 | 기여 진입 장벽이 낮다. CORS/세션 잡음 없이 즉시 시작. |
-| **풀 감사 로그 + WebSocket 라이브 피드** | `activity_log` 불변 + `/api/companies/:companyId/events/ws` | 비동기 분산 에이전트 환경에서 *지금 무슨 일이 일어나는가*를 사람이 따라잡을 수 있다. |
+| **풀 감사 로그 + WebSocket 라이브 피드** | `activity_log` append 중심 감사 로그(`server/src/services/activity-log.ts:65-87`) + `/api/companies/:companyId/events/ws` 기반 live event invalidation(`server/src/realtime/live-events-ws.ts:63-65, 208-211`) | 비동기 분산 에이전트 환경에서 *지금 무슨 일이 일어나는가*를 사람이 따라잡을 수 있다. |
 | **포터블 회사 (template/snapshot)** | `services/company-portability.ts` (178 KB) | 회사 설정 자체가 export/import 가능 — Agent Companies spec/v1의 기반. |
 | **플러그인 SDK + 어댑터 외부화** | packages/plugins, \~/.paperclip/adapter-plugins.json | "knowledge base · 매출 회계 · 새 어댑터" 같은 V1 범위 밖 기능을 코어 수정 없이 도입할 수 있다. |
 | **무설정 dev DB** | embedded-postgres 18, 자동 migrations | 첫 사용자의 시간 1\~2일을 절약. PGlite 보다 호환성 우선. |
@@ -43,16 +43,16 @@ topic: 강점 · 약점 · 트레이드오프 (09)
 
 | 약점 | 어디서 드러나는가 | 영향 |
 |---|---|---|
-| **거대 단일 파일들** | `routes/issues.ts` 205 KB, `services/issues.ts` 201 KB, `services/company-portability.ts` 178 KB, `ui/pages/IssueDetail.tsx` 163 KB, `routes/access.ts` 140 KB, `routes/agents.ts` 119 KB, `routes/plugins.ts` 93 KB | 가독성·테스트성 저해. 신규 기여자가 한 번에 구조를 파악하기 어렵다. 서비스 분할이 점진적 과제. |
-| **자동 재할당 부재** | execution-semantics §12의 *"does not automatically reassign"* | 에이전트 한 명이 사라지면 보드가 직접 처리해야 한다. 본질적으로 *의도된* 약점이지만 실수로 사람이 떠난 경우 시스템이 그걸 *알려 줄* 뿐 *해결*하지 않는다. |
-| **고급 거버넌스 부재 (V1)** | 회사 멤버십(`packages/db/src/schema/company_memberships.ts`)과 4 단계 휴먼 role(owner/admin/operator/viewer, `packages/shared/src/constants.ts:624-630`)은 이미 있으나, `approvalsNeeded > 1` 다중 승인이 거부되고(`server/src/__tests__/issue-execution-policy.test.ts:98-105`) multi-member boards · advanced governance 는 Not V1(`doc/SPEC.md:489-493`) | 4-eye 결재·승인 위임·다중 멤버 보드를 *코어*에서 표현하기 어렵다. 엔터프라이즈 거버넌스가 즉시 필요한 환경은 플러그인 또는 외부 정책 엔진으로 보강해야 한다. |
+| **거대 단일 파일들** | `routes/issues.ts` 205 KB, `services/issues.ts` 201 KB, `services/company-portability.ts` 178 KB, `ui/src/pages/IssueDetail.tsx` 164 KB, `routes/access.ts` 140 KB, `routes/agents.ts` 119 KB, `routes/plugins.ts` 93 KB | 가독성·테스트성 저해. 신규 기여자가 한 번에 구조를 파악하기 어렵다. 서비스 분할이 점진적 과제. |
+| **자동 재할당 부재** | execution-semantics §11 의 *"does not choose a replacement agent"* (`doc/execution-semantics.md:405-419`) | 에이전트 한 명이 사라지면 보드가 직접 처리해야 한다. 본질적으로 *의도된* 약점이지만 실수로 사람이 떠난 경우 시스템이 그걸 *알려 줄* 뿐 *해결*하지 않는다. |
+| **고급 거버넌스 부재 (V1)** | 회사 멤버십(`packages/db/src/schema/company_memberships.ts`)과 4 단계 휴먼 role(owner/admin/operator/viewer, `packages/shared/src/constants.ts:624-630`)은 이미 있으나, `approvalsNeeded > 1` 다중 승인이 거부되고(`server/src/__tests__/issue-execution-policy.test.ts:98-105`) multi-member boards · advanced governance 는 Not V1(`doc/SPEC.md:491-495`, `doc/SPEC-implementation.md:81`) | 4-eye 결재·승인 위임·다중 멤버 보드를 *코어*에서 표현하기 어렵다. 엔터프라이즈 거버넌스가 즉시 필요한 환경은 플러그인 또는 외부 정책 엔진으로 보강해야 한다. |
 | **지식 베이스 부재** | SPEC §11 anti-goal | 에이전트 간 *공유된 사실/문서*가 task system + comments 외에 없다. RAG 같은 KB가 필요한 도메인은 플러그인으로 자체 해결해야 한다. |
 | **외부 매출/비용 회계 부재** | SPEC §12 anti-requirement | "회사가 돈을 벌고 있나?" 라는 질문을 시스템이 안다고 보장하지 않는다. 토큰 비용만 추적. |
 | **자동 모델 가격 업데이트 X** | `cost_events.cost_cents` 는 인입 시점에 산정 | 가격 모델이 자주 바뀌는 LLM 시장에서, 가격표 갱신을 누가/어떻게 책임지는지 명확치 않다. |
 | **OAuth/SSO 부재** | Better Auth 세션 + 이메일 기반 | 엔터프라이즈 도입 시 필수인 IdP 통합이 V1 에 없다. |
-| **모바일 UI 미완성** | "Mobile Ready" 슬로건 vs `Inbox.tsx` 101 KB의 데스크톱 위주 디자인 | README가 약속한 모바일 모니터링이 일부 페이지에 한정. |
+| **모바일 UI 미완성** | "Mobile Ready" 슬로건(`README.md:123-124`) vs `ui/src/pages/Inbox.tsx` 108 KiB 의 데스크톱 위주 디자인 | README가 약속한 모바일 모니터링이 일부 페이지에 한정. |
 | **Cost dashboard의 시각화 한계** | `Costs.tsx` 48 KB 단일 페이지 | 분석 깊이(코호트, 추세, 모델 mix)가 LangSmith 등 전문 도구 대비 얕다. |
-| **공식 클라우드 마켓플레이스 미정** | "ClipHub coming soon" | 사용자 간 회사 템플릿 교환이 느슨하다. |
+| **공식 클라우드 마켓플레이스 미정** | Public marketplace(ClipHub)는 V1 밖(`doc/SPEC-implementation.md:80`), 별도 hosted registry 구상(`doc/CLIPHUB.md:1-13, 204-213`) | 사용자 간 회사 템플릿 교환이 느슨하다. |
 
 표 2의 약점들은 *시간 차원*에서 두 종류로 나뉜다 — *V1 의도적 범위 밖 항목* (자동 재할당 부재, 고급 거버넌스(4-eye/다중 승인) 부재, KB 부재, 매출 회계 부재, OAuth/SSO, 클라우드 마켓플레이스)과 *시간이 흐르면 자연스럽게 줄어들 미성숙* (거대 단일 파일, 자동 가격 업데이트, 모바일 UI, Cost dashboard 깊이)이다. 첫 묶음을 만나면 기다리거나 직접 플러그인으로 메우는 선택지가 있고, 두 번째 묶음은 프로젝트 성숙도와 함께 해소될 가능성이 크다.
 
