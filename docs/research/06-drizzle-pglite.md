@@ -37,7 +37,7 @@ topic: Drizzle ORM + Embedded PostgreSQL
 
 ## 4. Paperclip 과의 관계
 
-Paperclip 의 `packages/db/` 는 Drizzle ORM 으로 **86 개의 `pgTable()` 정의를 78 개 스키마 파일** 에 선언한다 (Ch02 합의 사실). `drizzle.config.ts` 는 Drizzle Kit 설정에서 `process.env.DATABASE_URL` 을 읽어 `generate` 등을 처리하지만 (`packages/db/drizzle.config.ts`), `pnpm db:migrate` 의 실제 연결 결정은 `packages/db/src/migrate.ts` 가 호출하는 `resolveMigrationConnection()` 이 담당해 `DATABASE_URL` → `.paperclip` env/config → embedded-postgres fallback 순서로 해석한다 (`packages/db/src/migration-runtime.ts:183-193`). 개발 모드에서는 `embedded-postgres@^18.1.0-beta.16` 로 로컬 PostgreSQL 클러스터를 프로세스 안에서 띄우고, 운영에서는 동일한 `DATABASE_URL` 만 Supabase 등 호스티드 Postgres 로 바꾸면 같은 마이그레이션과 같은 쿼리 코드가 그대로 돈다. 즉 Drizzle 의 **DB-호환 드라이버 추상화** + embedded-postgres 의 **네이티브 dev 인스턴스** 조합이 fallback 체인 한 곳만 손대면 dev↔prod 전환을 가능하게 만든다.
+Paperclip 의 `packages/db/` 는 Drizzle ORM 으로 **88 개의 `pgTable()` 정의를 79 개 스키마 파일** (`index.ts` 배럴 제외) 에 선언한다 (Ch02 합의 사실). `drizzle.config.ts` 는 Drizzle Kit 설정에서 `process.env.DATABASE_URL` 을 읽어 `generate` 등을 처리하지만 (`packages/db/drizzle.config.ts`), `pnpm db:migrate` 의 실제 연결 결정은 `packages/db/src/migrate.ts` 가 호출하는 `resolveMigrationConnection()` 이 담당해 `DATABASE_URL` → `.paperclip` env/config → embedded-postgres fallback 순서로 해석한다 (`packages/db/src/migration-runtime.ts:183-193`). 개발 모드에서는 `embedded-postgres@^18.1.0-beta.16` 로 로컬 PostgreSQL 클러스터를 프로세스 안에서 띄우고, 운영에서는 동일한 `DATABASE_URL` 만 Supabase 등 호스티드 Postgres 로 바꾸면 같은 마이그레이션과 같은 쿼리 코드가 그대로 돈다. 즉 Drizzle 의 **DB-호환 드라이버 추상화** + embedded-postgres 의 **네이티브 dev 인스턴스** 조합이 fallback 체인 한 곳만 손대면 dev↔prod 전환을 가능하게 만든다.
 
 ## 5. 출처
 

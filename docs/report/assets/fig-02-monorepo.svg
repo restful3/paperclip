@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" font-family="'Inter','Noto Sans KR',sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 680" font-family="'Inter','Noto Sans KR',sans-serif" font-size="13">
   <defs>
     <marker id="m2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M0,0 L10,5 L0,10 z" fill="#5b5b62"/>
     </marker>
   </defs>
-  <rect width="960" height="600" fill="#fafafa"/>
+  <rect width="960" height="680" fill="#fafafa"/>
 
   <!-- Apps tier -->
   <text x="40" y="50" fill="#5b5b62" font-size="11" letter-spacing="2" font-weight="700">APPLICATIONS</text>
@@ -28,85 +28,93 @@
   <text x="660" y="132" text-anchor="middle" fill="#5b5b62" font-size="11">paperclipai onboard / doctor</text>
   <text x="660" y="146" text-anchor="middle" fill="#5b5b62" font-size="11">configure / plugin / db:backup</text>
 
-  <!-- Adapters tier -->
-  <text x="40" y="190" fill="#5b5b62" font-size="11" letter-spacing="2" font-weight="700">PACKAGES / ADAPTERS  ·  packages/adapters/*</text>
+  <!-- Adapters tier (2 rows × 5 = 10 in-tree workspace adapters) -->
+  <text x="40" y="190" fill="#5b5b62" font-size="11" letter-spacing="2" font-weight="700">PACKAGES / ADAPTERS  ·  packages/adapters/* (10 in-tree)</text>
   <line x1="40" y1="198" x2="920" y2="198" stroke="#d4d4d8"/>
 
   <g font-size="11" fill="#1a1a2e" font-weight="600">
-  <rect x="40" y="216" width="100" height="48" rx="4" fill="#ffffff" stroke="#1a1a2e"/>
-  <text x="90" y="240" text-anchor="middle">claude-local</text><text x="90" y="255" text-anchor="middle" font-size="10" fill="#5b5b62" font-weight="400">Claude Code</text>
+  <!-- Row 1 — 5 local CLI adapters -->
+  <rect x="114" y="216" width="140" height="48" rx="4" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="184" y="240" text-anchor="middle">claude-local</text><text x="184" y="255" text-anchor="middle" font-size="10" fill="#5b5b62" font-weight="400">Claude Code</text>
 
-  <rect x="148" y="216" width="100" height="48" rx="4" fill="#ffffff" stroke="#1a1a2e"/>
-  <text x="198" y="240" text-anchor="middle">codex-local</text><text x="198" y="255" text-anchor="middle" font-size="10" fill="#5b5b62" font-weight="400">OpenAI Codex</text>
+  <rect x="262" y="216" width="140" height="48" rx="4" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="332" y="240" text-anchor="middle">codex-local</text><text x="332" y="255" text-anchor="middle" font-size="10" fill="#5b5b62" font-weight="400">OpenAI Codex</text>
 
-  <rect x="256" y="216" width="100" height="48" rx="4" fill="#ffffff" stroke="#1a1a2e"/>
-  <text x="306" y="240" text-anchor="middle">cursor-local</text><text x="306" y="255" text-anchor="middle" font-size="10" fill="#5b5b62" font-weight="400">Cursor CLI</text>
+  <rect x="410" y="216" width="140" height="48" rx="4" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="480" y="240" text-anchor="middle">cursor-local</text><text x="480" y="255" text-anchor="middle" font-size="10" fill="#5b5b62" font-weight="400">Cursor CLI</text>
 
-  <rect x="364" y="216" width="100" height="48" rx="4" fill="#ffffff" stroke="#1a1a2e"/>
-  <text x="414" y="240" text-anchor="middle">gemini-local</text><text x="414" y="255" text-anchor="middle" font-size="10" fill="#5b5b62" font-weight="400">Gemini CLI</text>
+  <rect x="558" y="216" width="140" height="48" rx="4" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="628" y="240" text-anchor="middle">cursor-cloud</text><text x="628" y="255" text-anchor="middle" font-size="10" fill="#5b5b62" font-weight="400">Cursor Cloud API</text>
 
-  <rect x="472" y="216" width="100" height="48" rx="4" fill="#ffffff" stroke="#1a1a2e"/>
-  <text x="522" y="240" text-anchor="middle">opencode-local</text><text x="522" y="255" text-anchor="middle" font-size="10" fill="#5b5b62" font-weight="400">sst/opencode</text>
+  <rect x="706" y="216" width="140" height="48" rx="4" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="776" y="240" text-anchor="middle">gemini-local</text><text x="776" y="255" text-anchor="middle" font-size="10" fill="#5b5b62" font-weight="400">Gemini CLI</text>
 
-  <rect x="580" y="216" width="100" height="48" rx="4" fill="#ffffff" stroke="#1a1a2e"/>
-  <text x="630" y="240" text-anchor="middle">pi-local</text><text x="630" y="255" text-anchor="middle" font-size="10" fill="#5b5b62" font-weight="400">pi-coding-agent</text>
+  <!-- Row 2 — 4 more local + 1 webhook gateway -->
+  <rect x="114" y="276" width="140" height="48" rx="4" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="184" y="300" text-anchor="middle">grok-local</text><text x="184" y="315" text-anchor="middle" font-size="10" fill="#5b5b62" font-weight="400">xAI Grok</text>
 
-  <rect x="688" y="216" width="100" height="48" rx="4" fill="#ffffff" stroke="#1a1a2e"/>
-  <text x="738" y="240" text-anchor="middle">acpx-local</text><text x="738" y="255" text-anchor="middle" font-size="10" fill="#5b5b62" font-weight="400">ACP / Zed</text>
+  <rect x="262" y="276" width="140" height="48" rx="4" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="332" y="300" text-anchor="middle">opencode-local</text><text x="332" y="315" text-anchor="middle" font-size="10" fill="#5b5b62" font-weight="400">sst/opencode</text>
 
-  <rect x="796" y="216" width="124" height="48" rx="4" fill="#fde7e3" stroke="#c84a3a"/>
-  <text x="858" y="240" text-anchor="middle" fill="#c84a3a">openclaw-gateway</text><text x="858" y="255" text-anchor="middle" font-size="10" fill="#5b5b62" font-weight="400">HTTP webhook</text>
+  <rect x="410" y="276" width="140" height="48" rx="4" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="480" y="300" text-anchor="middle">pi-local</text><text x="480" y="315" text-anchor="middle" font-size="10" fill="#5b5b62" font-weight="400">pi-coding-agent</text>
+
+  <rect x="558" y="276" width="140" height="48" rx="4" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="628" y="300" text-anchor="middle">acpx-local</text><text x="628" y="315" text-anchor="middle" font-size="10" fill="#5b5b62" font-weight="400">ACP / Zed</text>
+
+  <rect x="706" y="276" width="140" height="48" rx="4" fill="#fde7e3" stroke="#c84a3a"/>
+  <text x="776" y="300" text-anchor="middle" fill="#c84a3a">openclaw-gateway</text><text x="776" y="315" text-anchor="middle" font-size="10" fill="#5b5b62" font-weight="400">HTTP webhook</text>
   </g>
 
-  <rect x="40" y="276" width="312" height="40" rx="4" fill="#ffffff" stroke="#5b5b62" stroke-dasharray="3 3"/>
-  <text x="196" y="300" text-anchor="middle" fill="#5b5b62" font-size="11">packages/adapter-utils — shared adapter helpers · session bridge · output parsing</text>
+  <rect x="40" y="340" width="312" height="40" rx="4" fill="#ffffff" stroke="#5b5b62" stroke-dasharray="3 3"/>
+  <text x="196" y="364" text-anchor="middle" fill="#5b5b62" font-size="11">packages/adapter-utils — shared adapter helpers · session bridge · output parsing</text>
 
   <!-- Shared tier -->
-  <text x="40" y="350" fill="#5b5b62" font-size="11" letter-spacing="2" font-weight="700">PACKAGES / SHARED CORE</text>
-  <line x1="40" y1="358" x2="920" y2="358" stroke="#d4d4d8"/>
+  <text x="40" y="414" fill="#5b5b62" font-size="11" letter-spacing="2" font-weight="700">PACKAGES / SHARED CORE</text>
+  <line x1="40" y1="422" x2="920" y2="422" stroke="#d4d4d8"/>
 
-  <rect x="80" y="376" width="200" height="80" rx="8" fill="#dde7f3" stroke="#0f2c59"/>
-  <text x="180" y="400" text-anchor="middle" fill="#0f2c59" font-weight="700">packages/db</text>
-  <text x="180" y="418" text-anchor="middle" fill="#5b5b62" font-size="11">Drizzle schema (75+ tables)</text>
-  <text x="180" y="434" text-anchor="middle" fill="#5b5b62" font-size="11">migrations · Postgres client</text>
-  <text x="180" y="450" text-anchor="middle" fill="#5b5b62" font-size="11">embedded-postgres</text>
+  <rect x="80" y="440" width="200" height="80" rx="8" fill="#dde7f3" stroke="#0f2c59"/>
+  <text x="180" y="464" text-anchor="middle" fill="#0f2c59" font-weight="700">packages/db</text>
+  <text x="180" y="482" text-anchor="middle" fill="#5b5b62" font-size="11">Drizzle schema (pgTable 88개)</text>
+  <text x="180" y="498" text-anchor="middle" fill="#5b5b62" font-size="11">migrations · Postgres client</text>
+  <text x="180" y="514" text-anchor="middle" fill="#5b5b62" font-size="11">embedded-postgres</text>
 
-  <rect x="320" y="376" width="200" height="80" rx="8" fill="#dde7f3" stroke="#0f2c59"/>
-  <text x="420" y="400" text-anchor="middle" fill="#0f2c59" font-weight="700">packages/shared</text>
-  <text x="420" y="418" text-anchor="middle" fill="#5b5b62" font-size="11">API types · validators</text>
-  <text x="420" y="434" text-anchor="middle" fill="#5b5b62" font-size="11">constants · zod schemas</text>
-  <text x="420" y="450" text-anchor="middle" fill="#5b5b62" font-size="11">issue-references · routine-vars</text>
+  <rect x="320" y="440" width="200" height="80" rx="8" fill="#dde7f3" stroke="#0f2c59"/>
+  <text x="420" y="464" text-anchor="middle" fill="#0f2c59" font-weight="700">packages/shared</text>
+  <text x="420" y="482" text-anchor="middle" fill="#5b5b62" font-size="11">API types · validators</text>
+  <text x="420" y="498" text-anchor="middle" fill="#5b5b62" font-size="11">constants · zod schemas</text>
+  <text x="420" y="514" text-anchor="middle" fill="#5b5b62" font-size="11">issue-references · routine-vars</text>
 
-  <rect x="560" y="376" width="200" height="80" rx="8" fill="#dde7f3" stroke="#0f2c59"/>
-  <text x="660" y="400" text-anchor="middle" fill="#0f2c59" font-weight="700">packages/mcp-server</text>
-  <text x="660" y="418" text-anchor="middle" fill="#5b5b62" font-size="11">MCP tools/resources</text>
-  <text x="660" y="434" text-anchor="middle" fill="#5b5b62" font-size="11">stdio · streamable-HTTP</text>
-  <text x="660" y="450" text-anchor="middle" fill="#5b5b62" font-size="11">embedded for agent skills</text>
+  <rect x="560" y="440" width="200" height="80" rx="8" fill="#dde7f3" stroke="#0f2c59"/>
+  <text x="660" y="464" text-anchor="middle" fill="#0f2c59" font-weight="700">packages/mcp-server</text>
+  <text x="660" y="482" text-anchor="middle" fill="#5b5b62" font-size="11">MCP tools/resources</text>
+  <text x="660" y="498" text-anchor="middle" fill="#5b5b62" font-size="11">stdio · streamable-HTTP</text>
+  <text x="660" y="514" text-anchor="middle" fill="#5b5b62" font-size="11">embedded for agent skills</text>
 
   <!-- Plugins tier -->
-  <text x="40" y="490" fill="#5b5b62" font-size="11" letter-spacing="2" font-weight="700">PACKAGES / PLUGINS</text>
-  <line x1="40" y1="498" x2="920" y2="498" stroke="#d4d4d8"/>
+  <text x="40" y="554" fill="#5b5b62" font-size="11" letter-spacing="2" font-weight="700">PACKAGES / PLUGINS</text>
+  <line x1="40" y1="562" x2="920" y2="562" stroke="#d4d4d8"/>
 
-  <rect x="80" y="516" width="380" height="64" rx="8" fill="#ffffff" stroke="#1a1a2e"/>
-  <text x="270" y="538" text-anchor="middle" fill="#1a1a2e" font-weight="700">packages/plugins</text>
-  <text x="270" y="556" text-anchor="middle" fill="#5b5b62" font-size="11">plugin SDK · plugin runtime · plugin DB namespaces</text>
-  <text x="270" y="572" text-anchor="middle" fill="#5b5b62" font-size="11">webhooks · jobs · UI ext registry</text>
+  <rect x="80" y="580" width="380" height="64" rx="8" fill="#ffffff" stroke="#1a1a2e"/>
+  <text x="270" y="602" text-anchor="middle" fill="#1a1a2e" font-weight="700">packages/plugins</text>
+  <text x="270" y="620" text-anchor="middle" fill="#5b5b62" font-size="11">plugin SDK · plugin runtime · plugin DB namespaces</text>
+  <text x="270" y="636" text-anchor="middle" fill="#5b5b62" font-size="11">webhooks · jobs · UI ext registry</text>
 
-  <rect x="500" y="516" width="380" height="64" rx="8" fill="#ffffff" stroke="#1a1a2e" stroke-dasharray="3 3"/>
-  <text x="690" y="538" text-anchor="middle" fill="#1a1a2e" font-weight="700">External adapter plugins (out-of-tree)</text>
-  <text x="690" y="556" text-anchor="middle" fill="#5b5b62" font-size="11">e.g. hermes-paperclip-adapter (HenkDz fork)</text>
-  <text x="690" y="572" text-anchor="middle" fill="#5b5b62" font-size="11">~/.paperclip/adapter-plugins.json</text>
+  <rect x="500" y="580" width="380" height="64" rx="8" fill="#ffffff" stroke="#1a1a2e" stroke-dasharray="3 3"/>
+  <text x="690" y="602" text-anchor="middle" fill="#1a1a2e" font-weight="700">External (out-of-tree) — server/package.json dependency</text>
+  <text x="690" y="620" text-anchor="middle" fill="#5b5b62" font-size="11">hermes-paperclip-adapter (HenkDz fork) — workspace 패키지 아님</text>
+  <text x="690" y="636" text-anchor="middle" fill="#5b5b62" font-size="11">+ ~/.paperclip/adapter-plugins.json 으로 동적 등록 가능</text>
 
   <!-- arrows: server depends on db, shared, adapters, mcp-server, plugins -->
-  <path d="M180,154 L180,376" stroke="#5b5b62" stroke-width="1" fill="none" marker-end="url(#m2)"/>
-  <path d="M180,154 C300,250 320,310 420,376" stroke="#5b5b62" stroke-width="1" fill="none" marker-end="url(#m2)"/>
+  <path d="M180,154 L180,440" stroke="#5b5b62" stroke-width="1" fill="none" marker-end="url(#m2)"/>
+  <path d="M180,154 C300,300 320,360 420,440" stroke="#5b5b62" stroke-width="1" fill="none" marker-end="url(#m2)"/>
   <path d="M180,154 C400,180 540,200 640,216" stroke="#5b5b62" stroke-width="1" fill="none" marker-end="url(#m2)"/>
-  <path d="M180,154 C400,250 520,290 640,376" stroke="#5b5b62" stroke-width="1" fill="none" marker-end="url(#m2)"/>
-  <path d="M180,154 C220,300 220,440 240,516" stroke="#5b5b62" stroke-width="1" fill="none" marker-end="url(#m2)"/>
+  <path d="M180,154 C400,300 520,360 640,440" stroke="#5b5b62" stroke-width="1" fill="none" marker-end="url(#m2)"/>
+  <path d="M180,154 C220,340 220,500 240,580" stroke="#5b5b62" stroke-width="1" fill="none" marker-end="url(#m2)"/>
 
   <!-- ui depends on shared -->
-  <path d="M420,154 L420,376" stroke="#5b5b62" stroke-width="1" fill="none" marker-end="url(#m2)"/>
-  <!-- adapters depend on adapter-utils + shared -->
-  <path d="M196,264 L196,276" stroke="#5b5b62" stroke-width="1" fill="none" marker-end="url(#m2)"/>
-  <path d="M196,316 L320,376" stroke="#5b5b62" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#m2)"/>
+  <path d="M420,154 L420,440" stroke="#5b5b62" stroke-width="1" fill="none" marker-end="url(#m2)"/>
+  <!-- adapter rows depend on adapter-utils + shared -->
+  <path d="M184,324 L184,340" stroke="#5b5b62" stroke-width="1" fill="none" marker-end="url(#m2)"/>
+  <path d="M196,380 L320,440" stroke="#5b5b62" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#m2)"/>
 </svg>
