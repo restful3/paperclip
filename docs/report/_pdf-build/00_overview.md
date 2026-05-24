@@ -55,7 +55,7 @@ PRODUCT.md(`doc/PRODUCT.md:61-71`)의 다섯 제품 원칙과 SPEC.md §13(`doc/
 | 2 | **Company is the unit of organization** | 모든 데이터 엔티티가 `company_id` 로 스코프된다. 한 인스턴스에 여러 회사를 둘 수 있다. |
 | 3 | **Tasks are the communication channel** | 별도의 채팅·메신저 시스템 없음. 모든 통신은 issue + 댓글로 흘러 자연스러운 감사 이력이 된다. |
 | 4 | **All work traces to the goal** | 원칙: 모든 issue는 부모 사슬을 따라 회사 골(혹은 initiative)에 도달해야 한다. 구현: `goal_id`/`parent_id`가 nullable이며 누락 시 fallback이 회사 기본 goal로 채우려 시도한다. |
-| 5 | **Surface problems, don't hide them** | 자동 회복은 보수적으로만 — 문제를 자동 봉합하지 않고 명시적인 recovery issue 로 드러낸다. |
+| 5 | **Surface problems, don't hide them** | 자동 회복은 보수적으로만 — 문제를 자동 봉합하지 않고 명시적인 recovery action 으로 드러낸다 (source-scoped 가 기본, 독립 repair work 가 필요할 때만 별도 recovery issue 로 backed). |
 
 표 1을 코드와 매핑하면 다음과 같다 — 원칙 1은 **adapter 모델**로(`packages/adapters/*` + `packages/adapter-utils`), 2는 **multi-company 스키마**로(88개 테이블 중 67개가 가진 `company_id` 컬럼), 3은 **issues + comments**로(별도 채팅 테이블 부재), 4는 **부모/자식 위계**로(`packages/db/src/schema/issues.ts:28-29` 와 `server/src/services/issue-goal-fallback.ts:3-12` 의 `resolveIssueGoalId` fallback), 5는 [`doc/execution-semantics.md`](../../doc/execution-semantics.md)의 회복 규칙(liveness contract `:155-172` · 명시 recovery action `:174-197` · stranded 신호 `:207-240`)으로 구현되어 있다. 즉 다섯 원칙은 *문화적 슬로건*이 아니라 *스키마와 모듈 경계의 직접적 산물*이다 — 개발자가 "원칙 5를 무시하고 자동 재할당을 넣자"고 결정하면 회복 규칙 챕터와 데이터 모델 양쪽을 동시에 손대야 한다.
 

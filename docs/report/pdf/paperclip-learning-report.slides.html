@@ -1193,7 +1193,7 @@ html, body {
 <tr>
 <td>5</td>
 <td><strong>Surface problems, don&rsquo;t hide them</strong></td>
-<td>자동 회복은 보수적으로만 — 문제를 자동 봉합하지 않고 명시적인 recovery issue 로 드러낸다.</td>
+<td>자동 회복은 보수적으로만 — 문제를 자동 봉합하지 않고 명시적인 recovery action 으로 드러낸다 (source-scoped 가 기본, 독립 repair work 가 필요할 때만 별도 recovery issue 로 backed).</td>
 </tr>
 </tbody>
 </table>
@@ -2886,8 +2886,8 @@ pnpm paperclipai db:backup        # 논리 덤프
 </tr>
 <tr>
 <td>reports_to</td>
-<td>(없음 — CEO 만 NULL)</td>
-<td>두 번째부터 picker 활성화</td>
+<td>(첫 에이전트는 없음 — picker disabled)</td>
+<td>두 번째부터 picker 활성화. 현재 구현은 <code>No manager</code> 선택도 허용하므로 <em>CEO-only root</em> 는 운영 규칙·향후 invariant 로 봐야 한다 (<code>ui/src/components/ReportsToPicker.tsx:79-90</code>, validator <code>packages/shared/src/validators/agent.ts:66-79</code>).</td>
 </tr>
 <tr>
 <td><strong>adapter_type</strong></td>
@@ -2997,7 +2997,7 @@ BETTER_AUTH_SECRET=...               # openssl rand -hex 32
 PAPERCLIP_PUBLIC_URL=https://your-host  # auth.publicBaseUrl 과 동등, 명시적 base URL
 </code></pre>
 <p><code>authenticated/public</code> 모드에서는 Better Auth 세션이 강제되며 <code>BETTER_AUTH_SECRET</code> 과 <code>auth.publicBaseUrl</code> 이 <em>함께</em> 필수다(<code>cli/src/checks/deployment-auth-check.ts:28-60</code>). env-only 호스팅을 만들려면 <code>PAPERCLIP_DEPLOYMENT_MODE</code> / <code>EXPOSURE</code> 도 명시해야 한다 — 미설정이면 <code>local_trusted</code> + private 으로 떨어진다(<code>server/src/config.ts:160-180</code>).</p>
-<p><code>local_trusted</code> 로 오래 사용하다 <code>authenticated</code> 로 전환하는 경우 — instance admin 이 <code>local-board</code> 한 명뿐일 때에 한해 — 부팅 시 1회용 board-claim URL 이 경고로 표시되어, 로그인한 사용자가 instance admin 으로 승격되고 <code>local-board</code> 권한이 강등된다(<code>doc/DEPLOYMENT-MODES.md:115-126</code>, <code>server/src/board-claim.ts:44-73</code>, <code>server/src/routes/access.ts:2454-2495</code>).</p>
+<p><code>local_trusted</code> 로 오래 사용하다 <code>authenticated</code> 로 전환하는 경우 — instance admin 이 <code>local-board</code> 한 명뿐일 때에 한해 — 부팅 시 1회용 board-claim URL 이 경고로 표시되어, 로그인한 사용자가 instance admin 으로 승격되고 <code>local-board</code> 권한이 강등된다(<code>doc/DEPLOYMENT-MODES.md:115-126</code>, <code>server/src/board-claim.ts:44-73</code>, <code>server/src/routes/access.ts:2408-2453</code>).</p>
 <div class="slide-footer"><span class="slide-footer__brand">AI Odyssey</span><span class="slide-footer__page">83 / 98</span></div>
 </section>
 <section class="slide variant-default">
